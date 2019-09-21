@@ -1,6 +1,6 @@
 import sys
 import pygame
-import random
+import time
 
 
 
@@ -87,9 +87,11 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+            title_img = pygame.transform.smoothscale(pygame.image.load("assets/title_img.png").convert_alpha(),(600,400))
+            self.screen.blit(title_img, (400,-100))
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 100)
-            title = font.render('Cold War!', True, (0,0,0))
-            self.screen.blit(title, (400,100))
+            # title = font.render('Cold War!', True, (0,0,0))
+            # self.screen.blit(title, (400,100))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
@@ -99,7 +101,7 @@ class Controller:
 
 
             mouse = pygame.mouse.get_pos()
-
+            click = pygame.mouse.get_pressed()
             # font for buttons
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
@@ -120,11 +122,32 @@ class Controller:
                 pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
                 self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
 
-            pygame.draw.rect(self.screen, (80,208,255), (628,300,150,50))
-            self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
+            pygame.draw.rect(self.screen, (80,208,255), (608,300,200,50))
+            self.screen.blit(font.render("Medium", True, (0,0,0)), (620,301))
+            if mouse[0] in range(628, 823) and mouse[1] in range(300,350):
+                pygame.draw.rect(self.screen, (0,192,0), (608,300,195,50))
+                self.screen.blit(font.render("Medium", True, (0,0,0)), (620,301))
+                if click[0] == 1:
+                    selectedButton = 1
 
             pygame.draw.rect(self.screen, (80,208,255), (898,300,150,50))
-            self.screen.blit(font.render("Hard", True, (0,0,0)), (925,301))
+            self.screen.blit(font.render("Hard", True, (0,0,0)), (920,301))
+            if mouse[0] in range(898, 1048) and mouse[1] in range(300,350):
+                pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
+                self.screen.blit(font.render("Hard", True, (0,0,0)), (920,301))
+                if click[0] == 1:
+                    selectedButton = 2
+
+            #If button is selected, keep button green
+            if selectedButton == 0:
+                pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
+                self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
+            if selectedButton == 1:
+                pygame.draw.rect(self.screen, (0,192,0), (623,300,195,50))
+                self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
+            if selectedButton == 2:
+                pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
+                self.screen.blit(font.render("Hard", True, (0,0,0)), (925,301))
 
 
             font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
@@ -190,12 +213,21 @@ class Controller:
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
             if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170):
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
             pygame.display.flip()
 
     def gameLoop(self):
-        sys.exit()
+        pygame.key.set_repeat(1,50)
+        background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
+        self.screen.blit(background, (0,0))
+        while self.state == "GAME":
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(25, 25)), (200,200))
+
+            pygame.display.flip()
+            time.sleep(15)
+            sys.exit()
 
     def endLoop(self):
         pass

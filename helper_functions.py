@@ -63,9 +63,7 @@ def fTrage(country1, country2, resource1, amount1, resource2, amount2): #f = foo
         country1.treasury = country1.treasury - amount2
         country1.nukes = country1.nukes + amount1
 
-def launchNuke(c1, target, nResearch):
+def launchNuke(c1, target):
     if (c1.nuke > 0):
-        if (c1.nResearch >= x):
-            alskdjf
-        elif (c1.nResearch >= y):
-            asldfkj;
+        c1.nuke = c1.nuke - 1
+        if (target.antiair > c1)
