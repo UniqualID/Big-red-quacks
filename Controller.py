@@ -99,28 +99,33 @@ class Controller:
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
             self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
-            if mouse[0] in range(628, 778) and mouse[1] in range(b2y+170,b2y+170):
+            if mouse[0] in range(628, 778) and mouse[1] in range(b2y+120,b2y+170):  ##doesnt work
                 pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
                 self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+220,150,50))
             self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+232))
             if mouse[0] in range(628, 778) and mouse[1] in range(b2y+220,b2y+270):
-                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
-                self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+132))
+                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+220,150,50))
+                self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+232))
 
             pygame.draw.rect(self.screen, (80,208,255), (352,300,150,50))
             self.screen.blit(font.render("Easy", True, (0,0,0)), (390,315))
-            if mouse[0] in range(352, 402) and mouse[1] in range(300,350):
-                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
-                self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
+            if mouse[0] in range(352, 502) and mouse[1] in range(300,350):
+                pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
+                self.screen.blit(font.render("Easy", True, (0,0,0)), (390,315))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,300,150,50))
             self.screen.blit(font.render("Medium", True, (0,0,0)), (645,315))
+            # if mouse[0] in range(628, 778) and mouse[1] in range(b2y+220,b2y+270):
+            #     pygame.draw.rect(self.screen, (0,192,0), (628,b2y+220,150,50))
+            #     self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+232))
 
             pygame.draw.rect(self.screen, (80,208,255), (898,300,150,50))
             self.screen.blit(font.render("Hard", True, (0,0,0)), (935,315))
-
+            # if mouse[0] in range(628, 778) and mouse[1] in range(b2y+220,b2y+270):
+            #     pygame.draw.rect(self.screen, (0,192,0), (628,b2y+220,150,50))
+            #     self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+232))
 
             font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
             start_button = font.render('Select Difficulty', True, (0,0,0))
