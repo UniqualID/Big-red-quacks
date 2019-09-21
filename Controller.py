@@ -212,18 +212,17 @@ class Controller:
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
             if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170):
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
             pygame.display.flip()
 
     def gameLoop(self):
-        pygame.key.set_repeat(1,50)
-        background = pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(),(640*2+160, 480*2))
-        self.screen.blit(background, (0,0))
-        while self.state == "GAME":
-            print("Hello")
-
-            pygame.display.flip()
+        # pygame.key.set_repeat(1,50)
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(100,100)), (0,0))
+        # while self.state == "GAME":
+        #
+        #     pygame.display.flip()
             # time.sleep(15)
             # sys.exit()
 
