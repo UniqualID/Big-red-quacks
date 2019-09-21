@@ -7,12 +7,13 @@ import time
 class Controller:
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
-        self.country_values = [["USA", 350000, 355000, 1000000, 40, 35, 15, 20, 5, 20, [-1, 1, 0, 0, 0, 0]],
-                               ["UK", 100000, 102500, 125000, 15, 20, 5, 35, 30, 35, [1, -1, 0, 0, 0, 0]],
-                               ["Russia", 500000, 475000, 500000, 50, 20, 30, 5, 0, 15, [0, 0, -1, 1, 0, 0]],
-                               ["Korea", 150000, 140000, 170000, 25, 20, 10, 25, 10, 15, [0, 0, 1, -1, 0, 0]],
-                               ["China", 1500000, 1500000, 1600000, 20, 25, 20, 10, 5, 45, [0, 0, 0, 0, -1, 1]],
-                               ["Pakistan", 200000, 215000, 201250, 15, 15, 15, 40, 25, 30, [0, 0, 0, 0, 1, -1]]]
+        # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
+        self.country_values = [["USA", 350000000, 350000000, 1000000, 0, 0, 0, 0, 0, 0, [-1, 1, 0, 0, 0, 0]],
+                               ["UK", 66000000, 66250000, 250000, 0, 0, 0, 0, 0, 0, [1, -1, 0, 0, 0, 0]],
+                               ["Russia", 145000000, 144500000, 800000, 0, 0, 0, 0, 0, 0, [0, 0, -1, 1, 0, 0]],
+                               ["Korea", 25000000, 24750000, 100000, 0, 0, 0, 0, 0, 0, [0, 0, 1, -1, 0, 0]],
+                               ["China", 1400000000, 1400000000, 700000, 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, -1, 1]],
+                               ["Pakistan", 200000000, 200000000, 300000, 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, 1, -1]]]
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
@@ -75,7 +76,6 @@ class Controller:
         b2x = 1090
         b2y = 460
         selected = -1
-        selectedButton = -1
         pygame.key.set_repeat(1,50)
 
         music = pygame.mixer.Sound("assets/papers.wav")
@@ -87,9 +87,11 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+            title_img = pygame.transform.smoothscale(pygame.image.load("assets/title_img.png").convert_alpha(),(600,400))
+            self.screen.blit(title_img, (400,-100))
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 100)
-            title = font.render('Cold War!', True, (0,0,0))
-            self.screen.blit(title, (400,100))
+            # title = font.render('Cold War!', True, (0,0,0))
+            # self.screen.blit(title, (400,100))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
@@ -99,7 +101,7 @@ class Controller:
 
 
             mouse = pygame.mouse.get_pos()
-
+            click = pygame.mouse.get_pressed()
             # font for buttons
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
@@ -119,8 +121,6 @@ class Controller:
             if mouse[0] in range(352, 502) and mouse[1] in range(300,350):
                 pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
                 self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
-                if click[0] == 1:
-                    selectedButton = 0
 
             pygame.draw.rect(self.screen, (80,208,255), (608,300,200,50))
             self.screen.blit(font.render("Medium", True, (0,0,0)), (620,301))
