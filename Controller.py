@@ -63,10 +63,9 @@ class Controller:
 
 
     def startLoop2(self):
-        b1x = 145
-        b1y = 560
+        b1x = 150
         b2x = 1090
-        b2y = 560
+        b2y = 460
         pygame.key.set_repeat(1,50)
         while(self.state == "START2"):
             background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(640*2+160, 480*2))
@@ -77,24 +76,40 @@ class Controller:
             font = pygame.font.SysFont("arial", 40, True)
             title = font.render('Cold War!', True, (250,250,250))
             self.screen.blit(title, (630,100))
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b1y))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/china_flag.jpg").convert_alpha(),(100, 100)), (b1x+600,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
 
+            pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
+            self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
+
+            pygame.draw.rect(self.screen, (80,208,255), (628,b2y+220,150,50))
+            self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+232))
+
+            pygame.draw.rect(self.screen, (80,208,255), (352,300,150,50))
+            self.screen.blit(font.render("Easy", True, (0,0,0)), (390,315))
+
+            pygame.draw.rect(self.screen, (80,208,255), (628,300,150,50))
+            self.screen.blit(font.render("Medium", True, (0,0,0)), (645,315))
+
+            pygame.draw.rect(self.screen, (80,208,255), (898,300,150,50))
+            self.screen.blit(font.render("Hard", True, (0,0,0)), (935,315))
+
+
             font = pygame.font.SysFont("arial", 30, True)
             start_button = font.render('Select Difficulty', True, (0,0,0))
-            self.screen.blit(start_button, (485,415))
+            self.screen.blit(start_button, (605,215))
             quit_button = font.render('Pick a Country', True, (0,0,0))
-            self.screen.blit(quit_button, (95,415))
+            self.screen.blit(quit_button, (615,415))
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed() #tuple postition
-            if click[0] == 1 and mouse[0] in range(440,590) and mouse[1] in range(400,450):
-                self.state = "GAME"
-            if click[0] == 1 and mouse[0] in range(50,200) and mouse[1] in range(400,450):
+            if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
+            if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170):
+                self.state = "GAME"
             pygame.display.flip()
 
     def gameLoop(self):
