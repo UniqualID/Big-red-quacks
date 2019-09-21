@@ -98,28 +98,28 @@ class Controller:
             # font for buttons
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
-            self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
+            self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
             if mouse[0] in range(628, 778) and mouse[1] in range(b2y+170,b2y+170):
                 pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
-                self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
+                self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+220,150,50))
-            self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+232))
+            self.screen.blit(font.render("Exit", True, (0,0,0)), (650,b2y+219))
             if mouse[0] in range(628, 778) and mouse[1] in range(b2y+220,b2y+270):
                 pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
-                self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+132))
+                self.screen.blit(font.render("Exit", True, (0,0,0)), (650,b2y+219))
 
             pygame.draw.rect(self.screen, (80,208,255), (352,300,150,50))
-            self.screen.blit(font.render("Easy", True, (0,0,0)), (390,315))
+            self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
             if mouse[0] in range(352, 402) and mouse[1] in range(300,350):
                 pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
-                self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
+                self.screen.blit(font.render("Easy", True, (0,0,0)), (375,b2y+132))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,300,150,50))
-            self.screen.blit(font.render("Medium", True, (0,0,0)), (645,315))
+            self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
 
             pygame.draw.rect(self.screen, (80,208,255), (898,300,150,50))
-            self.screen.blit(font.render("Hard", True, (0,0,0)), (935,315))
+            self.screen.blit(font.render("Hard", True, (0,0,0)), (925,301))
 
 
             font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
