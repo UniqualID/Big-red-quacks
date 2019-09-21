@@ -218,10 +218,15 @@ class Controller:
 
             pygame.display.flip()
 
+    def startHud(self):
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud.png").convert_alpha(),(1440,630)), (0,330))
+
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
         background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
         self.screen.blit(background, (0,0))
+        self.startHud()
+
         while self.state == "GAME":
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (385,285)) #NYC
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (333,285)) #Chicago
@@ -242,11 +247,8 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1085,335)) #Chendu
             # self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1025,288)) #Beijing
 
-
-
             pygame.display.flip()
-            time.sleep(5)
+            time.sleep(20)
             sys.exit()
-
     def endLoop(self):
         pass
