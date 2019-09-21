@@ -76,6 +76,10 @@ class Controller:
         b2y = 460
         selected = -1
         pygame.key.set_repeat(1,50)
+
+        music = pygame.mixer.Sound("assets/papers.wav")
+        pygame.mixer.Sound.play(music)
+
         while(self.state == "START2"):
             background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(640*2+160, 480*2))
             self.screen.blit(background, (0,0))
@@ -99,21 +103,21 @@ class Controller:
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
             self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
-            if mouse[0] in range(628, 778) and mouse[1] in range(b2y+120,b2y+170):
+            if mouse[0] in range(628, 778) and mouse[1] in range(b2y+170,b2y+170):
                 pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
                 self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+220,150,50))
             self.screen.blit(font.render("Exit", True, (0,0,0)), (650,b2y+219))
             if mouse[0] in range(628, 778) and mouse[1] in range(b2y+220,b2y+270):
-                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+220,150,50))
+                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
                 self.screen.blit(font.render("Exit", True, (0,0,0)), (650,b2y+219))
 
             pygame.draw.rect(self.screen, (80,208,255), (352,300,150,50))
             self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
-            if mouse[0] in range(352, 502) and mouse[1] in range(300,350):
-                pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
-                self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
+            if mouse[0] in range(352, 402) and mouse[1] in range(300,350):
+                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
+                self.screen.blit(font.render("Easy", True, (0,0,0)), (375,b2y+132))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,300,150,50))
             self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
@@ -186,6 +190,7 @@ class Controller:
                 sys.exit()
             if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170):
                 self.state = "GAME"
+
             pygame.display.flip()
 
     def gameLoop(self):
