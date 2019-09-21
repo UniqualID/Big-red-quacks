@@ -87,9 +87,11 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+            title_img = pygame.transform.smoothscale(pygame.image.load("assets/title_img.png").convert_alpha(),(600,400))
+            self.screen.blit(title_img, (400,-100))
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 100)
-            title = font.render('Cold War!', True, (0,0,0))
-            self.screen.blit(title, (400,100))
+            # title = font.render('Cold War!', True, (0,0,0))
+            # self.screen.blit(title, (400,100))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
@@ -99,7 +101,7 @@ class Controller:
 
 
             mouse = pygame.mouse.get_pos()
-
+            click = pygame.mouse.get_pressed()
             # font for buttons
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
