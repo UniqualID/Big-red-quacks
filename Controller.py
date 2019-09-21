@@ -82,9 +82,9 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-            font = pygame.font.SysFont("arial", 40, True)
-            title = font.render('Cold War!', True, (250,250,250))
-            self.screen.blit(title, (630,100))
+            font = pygame.font.Font("assets/fonts/titleFont.TTF", 100)
+            title = font.render('Cold War!', True, (0,0,0))
+            self.screen.blit(title, (400,100))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
