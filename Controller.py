@@ -5,6 +5,7 @@ import time
 
 
 class Controller:
+    selected = -1
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
         # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
@@ -83,6 +84,7 @@ class Controller:
         b2x = 1090
         b2y = 460
         selected = -1
+        selectedButton = -1
         pygame.key.set_repeat(1,50)
 
         music = pygame.mixer.Sound("assets/papers.wav")
@@ -225,8 +227,12 @@ class Controller:
 
             pygame.display.flip()
 
+
     def startHud(self):
         self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud.png").convert_alpha(),(1440,630)), (0,330))
+        if self.selected == 0:
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), (50,40)), (0,0))
+
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
