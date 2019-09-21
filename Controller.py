@@ -74,6 +74,7 @@ class Controller:
         b2x = 1090
         b2y = 460
         selected = -1
+        selectedButton = -1
         pygame.key.set_repeat(1,50)
 
         music = pygame.mixer.Sound("assets/papers.wav")
@@ -117,12 +118,35 @@ class Controller:
             if mouse[0] in range(352, 502) and mouse[1] in range(300,350):
                 pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
                 self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
+                if click[0] == 1:
+                    selectedButton = 0
 
-            pygame.draw.rect(self.screen, (80,208,255), (628,300,150,50))
+            pygame.draw.rect(self.screen, (80,208,255), (628,300,195,50))
             self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
+            if mouse[0] in range(628, 823) and mouse[1] in range(300,350):
+                pygame.draw.rect(self.screen, (0,192,0), (628,300,195,50))
+                self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
+                if click[0] == 1:
+                    selectedButton = 1
 
             pygame.draw.rect(self.screen, (80,208,255), (898,300,150,50))
             self.screen.blit(font.render("Hard", True, (0,0,0)), (925,301))
+            if mouse[0] in range(898, 1048) and mouse[1] in range(300,350):
+                pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
+                self.screen.blit(font.render("Hard", True, (0,0,0)), (925,301))
+                if click[0] == 1:
+                    selectedButton = 2
+
+            #If button is selected, keep button green
+            if selectedButton == 0:
+                pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
+                self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
+            if selectedButton == 1:
+                pygame.draw.rect(self.screen, (0,192,0), (628,300,195,50))
+                self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
+            if selectedButton == 2:
+                pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
+                self.screen.blit(font.render("Hard", True, (0,0,0)), (925,301))
 
 
             font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
