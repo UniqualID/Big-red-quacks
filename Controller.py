@@ -6,7 +6,7 @@ WIDTH = 640
 HEIGHT = 480
 
 class Controller:
-    def __init__(self, width=640, height=480):
+    def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
         self.width = width
         self.height = height
@@ -30,8 +30,8 @@ class Controller:
     def startLoop1(self):
         pygame.key.set_repeat(1,50)
         while(self.state == "START1"):
-            background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(WIDTH, HEIGHT))
-            self.screen.blit(background, (0,0))
+            # background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(WIDTH, HEIGHT))
+            # self.screen.blit(background, (0,0))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
@@ -57,8 +57,8 @@ class Controller:
     def startLoop2(self):
         pygame.key.set_repeat(1,50)
         while(self.state == "START2"):
-            background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(WIDTH, HEIGHT))
-            self.screen.blit(background, (0,0))
+            # background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(WIDTH, HEIGHT))
+            # self.screen.blit(background, (0,0))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
