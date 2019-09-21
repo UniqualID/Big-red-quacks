@@ -216,7 +216,7 @@ class Controller:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
             elif selected == 5:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.png").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y)flagSize)
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
 
 
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
@@ -232,17 +232,17 @@ class Controller:
     def startHud(self):
         self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud.png").convert_alpha(),(1440,630)), (0,330))
         if self.selected == 0:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), (50,40)), (0,0)))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), (150,120)), (0,0))
         elif self.selected == 1:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), flagSize, flagLoc))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.png").convert_alpha(), (50,40)), (0,0))
         elif self.selected == 2:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), flagSize, flagLoc))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.png").convert_alpha(), (50,40)), (0,0))
         elif self.selected == 3:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), flagSize, flagLoc))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.png").convert_alpha(), (50,40)), (0,0))
         elif self.selected == 4:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), flagSize, flagLoc))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.png").convert_alpha(), (50,40)), (0,0))
         elif self.selected == 5:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), flagSize, flagLoc))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.png").convert_alpha(), (50,40)), (0,0))
 
 
     def gameLoop(self):
@@ -272,7 +272,7 @@ class Controller:
             # self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1025,288)) #Beijing
 
             pygame.display.flip()
-            time.sleep(5)
+            time.sleep(10)
             sys.exit()
     def endLoop(self):
         pass
