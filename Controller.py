@@ -16,7 +16,7 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "START2"
+        self.state = "GAME"
         pygame.font.init()
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
@@ -217,7 +217,15 @@ class Controller:
             pygame.display.flip()
 
     def gameLoop(self):
-        sys.exit()
+        pygame.key.set_repeat(1,50)
+        background = pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(),(640*2+160, 480*2))
+        self.screen.blit(background, (0,0))
+        while self.state == "GAME":
+            print("Hello")
+
+            pygame.display.flip()
+            # time.sleep(15)
+            # sys.exit()
 
     def endLoop(self):
         pass
