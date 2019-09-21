@@ -17,7 +17,7 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "START1"
+        self.state = "START2"
         pygame.font.init()
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
@@ -43,12 +43,12 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-            font = pygame.font.SysFont("arial", 40, True)
+            font = pygame.font.Font("assets/fonts/titleFont.TTF", 40)
             title = font.render('Cold War!', True, (250,250,250))
             self.screen.blit(title, (630,100))
             pygame.draw.rect(self.screen, (0,192,0), (b1x,b1y,200,100)) #quit ((RGB)(x, y, length x, length y))
             pygame.draw.rect(self.screen, (0,192,0), (b2x,b2y,200,100)) #play
-            font = pygame.font.SysFont("arial", 45, True)
+            font = pygame.font.Font("assets/fonts/pixelplay.TTF", 45)
             start_button = font.render('PLAY', True, (0,0,0))
             self.screen.blit(start_button, (b2x+57,b2y+35))
             quit_button = font.render('QUIT', True, (0,0,0))
@@ -82,7 +82,7 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-            font = pygame.font.Font("assets/fonts/titleFont.TTF", 100)
+            font = pygame.font.Font("assets/fonts/titleFont.ttf", 100)
             title = font.render('Cold War!', True, (0,0,0))
             self.screen.blit(title, (400,100))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
@@ -92,14 +92,28 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
 
+
+            mouse = pygame.mouse.get_pos()
+
+            # font for buttons
+            font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
             self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
+            if mouse[0] in range(628, 778) and mouse[1] in range(b2y+170,b2y+170):
+                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
+                self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+220,150,50))
             self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+232))
+            if mouse[0] in range(628, 778) and mouse[1] in range(b2y+220,b2y+270):
+                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
+                self.screen.blit(font.render("Exit", True, (0,0,0)), (668,b2y+132))
 
             pygame.draw.rect(self.screen, (80,208,255), (352,300,150,50))
             self.screen.blit(font.render("Easy", True, (0,0,0)), (390,315))
+            if mouse[0] in range(352, 402) and mouse[1] in range(300,350):
+                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
+                self.screen.blit(font.render("Play", True, (0,0,0)), (668,b2y+132))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,300,150,50))
             self.screen.blit(font.render("Medium", True, (0,0,0)), (645,315))
@@ -108,13 +122,13 @@ class Controller:
             self.screen.blit(font.render("Hard", True, (0,0,0)), (935,315))
 
 
-            font = pygame.font.SysFont("arial", 30, True)
+            font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
             start_button = font.render('Select Difficulty', True, (0,0,0))
             self.screen.blit(start_button, (605,215))
             quit_button = font.render('Pick a Country', True, (0,0,0))
             self.screen.blit(quit_button, (615,415))
-            mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed() #tuple postition
+
 
             #I CAN SEE YOUR HALO HALO HALO!!!
             if mouse[0] in range(b1x, b1x + 100) and mouse[1] in range(b2y, b2y + 100):
