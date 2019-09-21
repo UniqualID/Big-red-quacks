@@ -215,6 +215,7 @@ class Controller:
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
             if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170):
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
             pygame.display.flip()
