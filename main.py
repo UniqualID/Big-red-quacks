@@ -1,4 +1,4 @@
-from src import Controller
+import Controller
 
 def main():
     main_window = Controller.Controller()
