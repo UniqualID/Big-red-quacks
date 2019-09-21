@@ -5,12 +5,8 @@ import time
 
 
 class Controller:
-<<<<<<< HEAD
-    def __init__(self, width=1440, height=960):
-=======
-    selected = 0
+    selected = -1
     def __init__(self, width=640*2+160, height=480*2):
->>>>>>> 86fba679ca90ba49f631228f3494c8d33775f6b5
         pygame.init()
         # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
         self.country_values = [["USA", 350000000, 350000000, 1000000, 0, 0, 0, 0, 0, 0, [-1, 1, 0, 0, 0, 0]],
@@ -25,7 +21,7 @@ class Controller:
                         "Pakistan" : { "Islamabad" : [66666666.7, 0], "Karachi" : [66666666.7, 0], "Multan" : [66666666.7, 0]},
                         "UK" : {"London" : [33000000, 0], "Manchester" : [33000000, 0]},
                         "North Korea" : {"Pyongyang" : [25000000, 0]}
-                        }
+                            }
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
@@ -117,11 +113,15 @@ class Controller:
             click = pygame.mouse.get_pressed()
             # font for buttons
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
-            pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
+            if selected == -1:
+                pygame.draw.rect(self.screen, (88,88,88), (628,b2y+120,150,50))
+            else:
+                pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
             self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
             if mouse[0] in range(628, 778) and mouse[1] in range(b2y+120,b2y+170):
-                pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
-                self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
+                if selected != -1:
+                    pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
+                    self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
 
             pygame.draw.rect(self.screen, (80,208,255), (628,b2y+220,150,50))
             self.screen.blit(font.render("Exit", True, (0,0,0)), (650,b2y+219))
@@ -225,7 +225,7 @@ class Controller:
 
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
-            if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170):
+            if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170) and selected != -1:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
@@ -234,6 +234,8 @@ class Controller:
 
 
     def startHud(self):
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.png").convert_alpha(),(1440,630)), (0,330))
+
         if self.selected == 0:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 1:
@@ -246,7 +248,6 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.png").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 5:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.png").convert_alpha(), (195,195)), (20,785))
-        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud.png").convert_alpha(),(1440,630)), (0,330))
 
 
     def gameLoop(self):
@@ -283,7 +284,7 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (668,246)) #London
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (655,232)) #Manchester
 
-             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
 
 
             pygame.display.flip()
