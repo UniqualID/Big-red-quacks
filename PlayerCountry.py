@@ -4,7 +4,7 @@ class PlayerCountry:
 
 
     def __init__(self, name, treasury, population, cResources, gRate, GDP, gdpGrowth, nukeResearch, aaResearch, mProduction, fProduction,
-    arResarch, education, treasury, nukes, faValues, nukeDictionary, pointDictionary):  #publicOp
+    arResarch, education, treasury, nukes, faValues, nukeDictionary, cityDictionary):  #publicOp
 
         self.name = name
         self.treasury = treasury
@@ -24,7 +24,7 @@ class PlayerCountry:
         self.treasury = treasury
         self.nukes = nukes
         self.faValues = faValues
-        self.pointDictionary = pointDictionary
+        self.cityDictionary = cityDictionary
 
 
     def update(self, population, cResources, gRate, GDP, gdpGrowth):  #publicOp
