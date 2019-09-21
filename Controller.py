@@ -5,7 +5,7 @@ import time
 
 
 class Controller:
-    selected = -1
+    selected = 0
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
         # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
@@ -230,19 +230,19 @@ class Controller:
 
 
     def startHud(self):
-        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud.png").convert_alpha(),(1440,630)), (0,330))
         if self.selected == 0:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), (150,120)), (0,0))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 1:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.png").convert_alpha(), (50,40)), (0,0))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.png").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 2:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.png").convert_alpha(), (50,40)), (0,0))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.png").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 3:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.png").convert_alpha(), (50,40)), (0,0))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.png").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 4:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.png").convert_alpha(), (50,40)), (0,0))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.png").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 5:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.png").convert_alpha(), (50,40)), (0,0))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.png").convert_alpha(), (195,195)), (20,785))
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud.png").convert_alpha(),(1440,630)), (0,330))
 
 
     def gameLoop(self):
