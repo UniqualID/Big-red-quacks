@@ -5,7 +5,7 @@ import time
 
 
 class Controller:
-    def __init__(self, width=640*2+160, height=480*2):
+    def __init__(self, width=1440, height=960):
         pygame.init()
         # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
         self.country_values = [["USA", 350000000, 350000000, 1000000, 0, 0, 0, 0, 0, 0, [-1, 1, 0, 0, 0, 0]],
@@ -238,14 +238,23 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (350,310)) #Charolette
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (245,305)) #Denver
 
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1025,285)) #Urumqi
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1085,335)) #Chendu
-            # self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1025,288)) #Beijing
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1025,288)) #Urumqi
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1085,340)) #Chendu
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1145,300)) #Beijing
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1125,370)) #Guangzhou
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1155,335)) #Shanghai
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1120,340)) #Wuhan
 
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
+
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (668,246)) #London
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (655,232)) #Manchester
+
+             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
 
 
             pygame.display.flip()
-            time.sleep(5)
+            time.sleep(15)
             sys.exit()
 
     def endLoop(self):
