@@ -5,12 +5,9 @@ import time
 
 
 class Controller:
-<<<<<<< HEAD
-    def __init__(self, width=1440, height=960):
-=======
     selected = 0
     def __init__(self, width=640*2+160, height=480*2):
->>>>>>> 86fba679ca90ba49f631228f3494c8d33775f6b5
+
         pygame.init()
         # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
         self.country_values = [["USA", 350000000, 350000000, 1000000, 0, 0, 0, 0, 0, 0, [-1, 1, 0, 0, 0, 0]],
@@ -30,7 +27,7 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "START2"
+        self.state = "GAME"
         pygame.font.init()
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
@@ -283,11 +280,25 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (668,246)) #London
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (655,232)) #Manchester
 
-             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
+
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (960,330)) #Islamabad
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (955,345)) #Multan
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (945,365)) #Karachi
+
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (805,225)) #Moscow
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1020,230)) #Novosibirsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (800,210)) #St. Pertersburg
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1220,250)) #Khabarovsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1090,240)) #Irkutsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (830,270)) #Krasnodar
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1280,205)) #Magadan
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (825,205)) #Arkhangel'sk
+
 
 
             pygame.display.flip()
-            time.sleep(15)
+            time.sleep(10)
             sys.exit()
     def endLoop(self):
         pass
