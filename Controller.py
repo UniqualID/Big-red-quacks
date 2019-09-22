@@ -32,6 +32,7 @@ class Controller:
         self.player = None
         self.selected = -1
         self.turnCounter = 0;
+        self.selectedButton = -1
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
         while True:
@@ -46,8 +47,8 @@ class Controller:
         b1x = 150
         b2x = 1090
         b2y = 460
-        self.selected = -1
-        selectedButton = -1
+        # self.selected = -1
+        # self.selectedButton = -1
         pygame.key.set_repeat(1,50)
 
         music = pygame.mixer.Sound("assets/papers.wav")
@@ -62,8 +63,7 @@ class Controller:
             title_img = pygame.transform.smoothscale(pygame.image.load("assets/title_img.jpg").convert_alpha(),(600,400))
             self.screen.blit(title_img, (400,-100))
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 100)
-            # title = font.render('Cold War!', True, (0,0,0))
-            # self.screen.blit(title, (400,100))
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
@@ -76,13 +76,13 @@ class Controller:
             click = pygame.mouse.get_pressed()
             # font for buttons
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
-            if self.selected == -1:
+            if self.selected == -1 or self.selectedButton == -1:
                 pygame.draw.rect(self.screen, (88,88,88), (628,b2y+120,150,50))
             else:
                 pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
             self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
             if mouse[0] in range(628, 778) and mouse[1] in range(b2y+120,b2y+170):
-                if self.selected != -1:
+                if self.selected != -1 and self.selectedButton != -1:
                     pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
                     self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
 
@@ -98,15 +98,15 @@ class Controller:
                 pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
                 self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
                 if click[0] == 1:
-                    selectedButton = 0
+                    self.selectedButton = 0
 
             pygame.draw.rect(self.screen, (80,208,255), (608,300,200,50))
             self.screen.blit(font.render("Medium", True, (0,0,0)), (620,301))
-            if mouse[0] in range(608, 803) and mouse[1] in range(300,350):
+            if mouse[0] in range(608, 808) and mouse[1] in range(300,350):
                 pygame.draw.rect(self.screen, (0,192,0), (608,300,200,50))
                 self.screen.blit(font.render("Medium", True, (0,0,0)), (620,301))
                 if click[0] == 1:
-                    selectedButton = 1
+                    self.selectedButton = 1
 
             pygame.draw.rect(self.screen, (80,208,255), (898,300,150,50))
             self.screen.blit(font.render("Hard", True, (0,0,0)), (920,301))
@@ -114,18 +114,18 @@ class Controller:
                 pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
                 self.screen.blit(font.render("Hard", True, (0,0,0)), (920,301))
                 if click[0] == 1:
-                    selectedButton = 2
+                    self.selectedButton = 2
 
             #If button is selected, keep button green
-            if selectedButton == 0:
+            if self.selectedButton == 0:
                 pygame.draw.rect(self.screen, (0,192,0), (352,300,150,50))
                 self.screen.blit(font.render("Easy", True, (0,0,0)), (375,301))
-            if selectedButton == 1:
-                pygame.draw.rect(self.screen, (0,192,0), (623,300,195,50))
-                self.screen.blit(font.render("Medium", True, (0,0,0)), (640,301))
-            if selectedButton == 2:
+            if self.selectedButton == 1:
+                pygame.draw.rect(self.screen, (0,192,0), (608,300,200,50))
+                self.screen.blit(font.render("Medium", True, (0,0,0)), (620,301))
+            if self.selectedButton == 2:
                 pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
-                self.screen.blit(font.render("Hard", True, (0,0,0)), (925,301))
+                self.screen.blit(font.render("Hard", True, (0,0,0)), (920,301))
 
 
             font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
@@ -190,34 +190,48 @@ class Controller:
 
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
-            if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170) and self.selected != -1:
+            if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170) and self.selected != -1 and self.selectedButton != -1:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
-            # self.selected = selected
             pygame.event.wait()
             pygame.display.flip()
 
 
     def startHud(self, player, turns):
         font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
-        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.png").convert_alpha(),(1440,630)), (0,330))
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.png").convert_alpha(),(1440,580)), (0,280))
 
         if self.selected == 0:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 1:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 2:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 3:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 4:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 5:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,685))
 
-        #pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
-        #self.screen.blit(font.render(player.name, True, (0,0,0)), (375,301))
+        boxX = 470
+        boxY = 740
+        # pygame.draw.rect(self.screen, (0,191,0), (boxX,boxY+15,370,83))
+        self.screen.blit(font.render(player.name, True, (255,255,255)), (boxX, boxY-45))
+        self.screen.blit(font.render(str(player.population), True, (255,255,255)), (boxX+50, boxY+10))
+        self.screen.blit(font.render("pop.",True, (255,255,255)), (boxX, boxY+10))
+        self.screen.blit(font.render(str(player.cResources), True, (255,255,255)), (boxX+50, boxY+35))
+        self.screen.blit(font.render("res.",True, (255,255,255)), (boxX, boxY+35))
+        self.screen.blit(font.render(str(player.GDP), True, (255,255,255)), (boxX+50, boxY+60))
+        self.screen.blit(font.render("gdp.",True, (255,255,255)), (boxX, boxY+60))
+        self.screen.blit(font.render(str(player.fProduction), True, (255,255,255)), (boxX+350, boxY+10))
+        self.screen.blit(font.render("food prod.",True, (255,255,255)), (boxX+200, boxY+10))
+        self.screen.blit(font.render(str(player.nukes), True, (255,255,255)), (boxX+350, boxY+35))
+        self.screen.blit(font.render("nukes",True, (255,255,255)), (boxX+200, boxY+35))
+        self.screen.blit(font.render(str(player.faValues[player.name]), True, (255,255,255)), (boxX+350, boxY+60))
+        self.screen.blit(font.render("foregn aff.",True, (255,255,255)), (boxX+200, boxY+60))
+
 
 
 
@@ -346,10 +360,10 @@ class Controller:
                 print("test")
 
             ##### END TURN BUTTON #####
-            pygame.draw.rect(self.screen, (88,88,88), (1170, 830, 220, 110)) #x, y, len, wid
+            pygame.draw.rect(self.screen, (88,88,88), (1170, 730, 220, 110)) #x, y, len, wid
             font2 = pygame.font.Font("assets/fonts/pixelplay.ttf", 45)
-            self.screen.blit(font2.render("End Turn", True, (0,0,0)), (1215,855))
-            if click[0] == 1 and mouse[0] in range(1170, 1440) and mouse[1] in range(830, 940):
+            self.screen.blit(font2.render("End Turn", True, (0,0,0)), (1215,755))
+            if click[0] == 1 and mouse[0] in range(1170, 1440) and mouse[1] in range(730, 1040):
                 self.turnCounter = self.turnCounter + 1
 
             if click[0] == 1 and mouse[0] in range(0,100) and mouse[1] in range(0,100):
