@@ -197,7 +197,7 @@ class Controller:
             pygame.display.flip()
 
 
-    def startHud(self):
+    def startHud(self, player):
         self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.jpg").convert_alpha(),(1440,630)), (0,330))
 
         if self.selected == 0:
@@ -216,12 +216,13 @@ class Controller:
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
-        self.player = new PlayerCountry()
-        self.startHud()
+        self.player = new PlayerCountry(self.country_values[selected][0], self.country_values[selected][1], self.country_values[selected][2], self.country_values[selected][3])
 
+        #ayy weed lmao
         while self.state == "GAME":
             background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
             self.screen.blit(background, (0,0))
+            self.startHud(player)
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
@@ -297,9 +298,6 @@ class Controller:
             if click[0] == 1 and mouse[0] in range(655,668) and mouse[1] in range(232,245):
                 print("test")
 
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
-            if click[0] == 1 and mouse[0] in range(1180,1193) and mouse[1] in range(300,313):
-                print("test")
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (960,330)) #Islamabad
             if click[0] == 1 and mouse[0] in range(960,973) and mouse[1] in range(330,343):
                 print("test")
