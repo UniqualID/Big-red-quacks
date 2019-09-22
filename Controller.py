@@ -27,60 +27,19 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "GAME"
+        self.state = "START"
         pygame.font.init()
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
         while True:
-            if(self.state == "START1"):
-                self.startLoop1()
-            elif(self.state == "START2"):
-                self.startLoop2()
+            if(self.state == "START"):
+                self.startLoop()
             elif(self.state == "GAME"):
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
 
-    def startLoop1(self):
-        pygame.key.set_repeat(1,50)
-        b1x = 150
-        b1y = 560
-        b2x = 1090
-        b2y = 560
-        while(self.state == "START1"):
-            background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(640*2+160, 480*2))
-            self.screen.blit(background, (0,0))
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            font = pygame.font.Font("assets/fonts/titleFont.TTF", 40)
-            title = font.render('Cold War!', True, (250,250,250))
-            self.screen.blit(title, (630,100))
-            pygame.draw.rect(self.screen, (0,192,0), (b1x,b1y,200,100)) #quit ((RGB)(x, y, length x, length y))
-            pygame.draw.rect(self.screen, (0,192,0), (b2x,b2y,200,100)) #play
-            font = pygame.font.Font("assets/fonts/pixelplay.TTF", 45)
-            start_button = font.render('PLAY', True, (0,0,0))
-            self.screen.blit(start_button, (b2x+57,b2y+35))
-            quit_button = font.render('QUIT', True, (0,0,0))
-            self.screen.blit(quit_button, (b1x+57,b2y+35))
-            mouse = pygame.mouse.get_pos()
-            click = pygame.mouse.get_pressed() #tuple postition
-            if mouse[0] in range(b2x,b2x+200) and mouse[1] in range(b2y,b2y+100):
-                pygame.draw.rect(self.screen, (80,208,255), (b2x,b2y,200,100)) #play
-                start_button = font.render('PLAY', True, (0,0,0))
-                self.screen.blit(start_button, (b2x+57,b2y+35))
-            if mouse[0] in range(b1x,b1x+200) and mouse[1] in range(b1y,b1y+100):
-                pygame.draw.rect(self.screen, (80,208,255), (b1x,b1y,200,100)) #exit
-                quit_button = font.render('QUIT', True, (0,0,0))
-                self.screen.blit(quit_button, (b1x+57,b2y+35))
-            if click[0] == 1 and mouse[0] in range(b1x,b1x+200) and mouse[1] in range(b1y,b1y+100):
-                sys.exit()
-            if click[0] == 1 and mouse[0] in range(b2x,b2x+200) and mouse[1] in range(b2y,b2y+100):
-                self.state = "START2"
-            pygame.display.flip()
-
-
-    def startLoop2(self):
+    def startLoop(self):
         b1x = 150
         b2x = 1090
         b2y = 460
