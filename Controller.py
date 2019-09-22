@@ -671,6 +671,7 @@ class Controller:
             if click[0] == 1 and mouse[0] in range(1170, 1440) and mouse[1] in range(730, 1040):
                 self.turnCounter = self.turnCounter + 1
 
+            self.screen.blit(font2.render(str(self.turnCounter),True, (255,255,255)), (10,0))
             if click[0] == 1 and mouse[0] in range(0,100) and mouse[1] in range(0,100):
                 sys.exit()
             pygame.event.wait()
