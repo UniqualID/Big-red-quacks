@@ -151,3 +151,17 @@ def makeAntiAir(c1, city):
     if (c1.treasury >= 1500000):
         c1.treasury -= 1500000
         c1.cityDictionary.get(city)[1] + 1
+
+def winLossCondition(players, nukes, turn):
+    if (nukes >= 100):
+        return None, False
+    elif (turn == 100):
+        highest = 0
+        for player in players:
+            if ((player.population)/(player.startingPop) > highest):
+                highest = player
+        return player, True
+    else:
+        for player in players:
+            if ((player.population)/(player.startingPop) < .5):
+                return player, False
