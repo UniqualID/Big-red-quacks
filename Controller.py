@@ -236,8 +236,9 @@ class Controller:
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
             if click[0] == 1 and mouse[0] in range(385,600) and mouse[1] in range(285,600):
-                CityName = font.render("NYC", )
+                CityName = font.render("NYC", True, (0,0,0))
                 pygame.draw(rect.screen, (0,0,0), ())
+                self.screen.blit
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (333,285)) #Chicago
             if click[0] == 1 and mouse[0] in range(333,346) and mouse[1] in range(220,270):
                 print("test")
