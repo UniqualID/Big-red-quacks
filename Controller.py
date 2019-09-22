@@ -29,7 +29,7 @@ class Controller:
         self.background = pygame.Surface(self.screen.get_size()).convert()
         self.state = "START"
         pygame.font.init()
-        self.country = None
+        self.player = None
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
         while True:
@@ -39,8 +39,6 @@ class Controller:
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
-
-
 
     def startLoop(self):
         b1x = 150
@@ -171,27 +169,21 @@ class Controller:
             if selected == 0:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x-65, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
-                self.country = "USA"
             elif selected == 1:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x-65 + 200, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
-                self.country = "UK"
             elif selected == 2:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 400, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
-                self.country = "Russia"
             elif selected == 3:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 600, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/china_flag.jpg").convert_alpha(),(100, 100)), (b1x+600,b2y))
-                self.country = "China"
             elif selected == 4:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 800, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
-                self.country = "Pakistan"
             elif selected == 5:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
-                self.country = "Korea"
 
 
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
@@ -224,7 +216,7 @@ class Controller:
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
-
+        self.player = new PlayerCountry()
         self.startHud()
 
         while self.state == "GAME":
@@ -234,7 +226,6 @@ class Controller:
             click = pygame.mouse.get_pressed()
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
             if click[0] == 1 and mouse[0] in range(385,600) and mouse[1] in range(285,600):
-                # launchNuke(c1, c2, target)
                 print("test")
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (333,285)) #Chicago
             if click[0] == 1 and mouse[0] in range(333,346) and mouse[1] in range(220,270):
