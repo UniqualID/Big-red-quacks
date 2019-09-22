@@ -40,6 +40,8 @@ class Controller:
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
 
+
+
     def startLoop(self):
         b1x = 150
         b2x = 1090
@@ -57,7 +59,7 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-            title_img = pygame.transform.smoothscale(pygame.image.load("assets/title_img.png").convert_alpha(),(600,400))
+            title_img = pygame.transform.smoothscale(pygame.image.load("assets/title_img.jpg").convert_alpha(),(600,400))
             self.screen.blit(title_img, (400,-100))
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 100)
             # title = font.render('Cold War!', True, (0,0,0))
@@ -136,60 +138,66 @@ class Controller:
 
             #I CAN SEE YOUR HALO HALO HALO!!!
             if mouse[0] in range(b1x, b1x + 100) and mouse[1] in range(b2y, b2y + 100):
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(), (225, 175)), (b1x-65, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x-65, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
                 if click[0] == 1:
                     selected = 0
             if mouse[0] in range(b1x + 200, b1x + 100 + 200) and mouse[1] in range(b2y, b2y + 100):
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(), (225, 175)), (b1x-65 + 200, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x-65 + 200, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
                 if click[0] == 1:
                     selected = 1
             if mouse[0] in range(b1x + 400, b1x + 100 + 400) and mouse[1] in range(b2y, b2y + 100):
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(), (225, 175)), (b1x - 65 + 400, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 400, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
                 if click[0] == 1:
                     selected = 2
             if mouse[0] in range(b1x + 600, b1x + 100 + 600) and mouse[1] in range(b2y, b2y + 100):
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(), (225, 175)), (b1x - 65 + 600, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 600, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/china_flag.jpg").convert_alpha(),(100, 100)), (b1x+600,b2y))
                 if click[0] == 1:
                     selected = 3
             if mouse[0] in range(b1x + 800, b1x + 100 + 800) and mouse[1] in range(b2y, b2y + 100):
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(), (225, 175)), (b1x - 65 + 800, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 800, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
                 if click[0] == 1:
                     selected = 4
             if mouse[0] in range(b1x + 1000, b1x + 100 + 1000) and mouse[1] in range(b2y, b2y + 100):
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
                 if click[0] == 1:
                     selected = 5
 
             if selected == 0:
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.png").convert_alpha(), (225, 175)), (b1x-65, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x-65, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
+                self.country = "USA"
             elif selected == 1:
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.png").convert_alpha(), (225, 175)), (b1x-65 + 200, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x-65 + 200, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
+                self.country = "UK"
             elif selected == 2:
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.png").convert_alpha(), (225, 175)), (b1x - 65 + 400, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 400, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
+                self.country = "Russia"
             elif selected == 3:
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.png").convert_alpha(), (225, 175)), (b1x - 65 + 600, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 600, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/china_flag.jpg").convert_alpha(),(100, 100)), (b1x+600,b2y))
+                self.country = "China"
             elif selected == 4:
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.png").convert_alpha(), (225, 175)), (b1x - 65 + 800, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 800, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
+                self.country = "Pakistan"
             elif selected == 5:
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.png").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
+                self.country = "Korea"
 
 
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
             if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170) and selected != -1:
-                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.png").convert_alpha(),(100,100)), (0,0))
+                self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
             self.selected = selected
@@ -197,136 +205,137 @@ class Controller:
 
 
     def startHud(self):
-        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.png").convert_alpha(),(1440,630)), (0,330))
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.jpg").convert_alpha(),(1440,630)), (0,330))
 
         if self.selected == 0:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.png").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.jpg").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 1:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.png").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.jpg").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 2:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.png").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.jpg").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 3:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.png").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.jpg").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 4:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.png").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.jpg").convert_alpha(), (195,195)), (20,785))
         elif self.selected == 5:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.png").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,785))
 
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
-        background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
-        self.screen.blit(background, (0,0))
+
         self.startHud()
 
         while self.state == "GAME":
+            background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
+            self.screen.blit(background, (0,0))
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
 
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (385,285)) #NYC
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
             if click[0] == 1 and mouse[0] in range(385,600) and mouse[1] in range(285,600):
-                #launchNuke(c1, c2, target)
+                # launchNuke(c1, c2, target)
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (333,285)) #Chicago
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (333,285)) #Chicago
             if click[0] == 1 and mouse[0] in range(333,346) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (363,300)) #DC
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (363,300)) #DC
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (213,300)) #SLC
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (213,300)) #SLC
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (183,315)) #LA
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (183,315)) #LA
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (340,335)) #Jacksonville
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (340,335)) #Jacksonville
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (180,265)) #Seattle
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (180,265)) #Seattle
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (180,295)) #SF
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (180,295)) #SF
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (275,335)) #Ausin
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (275,335)) #Ausin
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (220,320)) #Pheonix
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (220,320)) #Pheonix
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (305,305)) #Saint Louis
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (305,305)) #Saint Louis
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (335,300)) #Columbus
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (335,300)) #Columbus
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (350,310)) #Charolette
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (350,310)) #Charolette
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (245,305)) #Denver
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (245,305)) #Denver
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1025,288)) #Urumqi
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1025,288)) #Urumqi
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1085,340)) #Chendu
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1085,340)) #Chendu
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1145,300)) #Beijing
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1145,300)) #Beijing
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1125,370)) #Guangzhou
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1125,370)) #Guangzhou
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1155,335)) #Shanghai
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1155,335)) #Shanghai
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1120,340)) #Wuhan
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1120,340)) #Wuhan
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (668,246)) #London
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (668,246)) #London
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (655,232)) #Manchester
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (655,232)) #Manchester
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (960,330)) #Islamabad
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (960,330)) #Islamabad
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (955,345)) #Multan
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (955,345)) #Multan
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (945,365)) #Karachi
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (945,365)) #Karachi
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (805,225)) #Moscow
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (805,225)) #Moscow
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1020,230)) #Novosibirsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1020,230)) #Novosibirsk
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (800,210)) #St. Pertersburg
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (800,210)) #St. Pertersburg
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1220,250)) #Khabarovsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1220,250)) #Khabarovsk
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1090,240)) #Irkutsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1090,240)) #Irkutsk
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (830,270)) #Krasnodar
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (830,270)) #Krasnodar
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1280,205)) #Magadan
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1280,205)) #Magadan
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (825,205)) #Arkhangel'sk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (825,205)) #Arkhangel'sk
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(220,270):
                 print("test")
 
