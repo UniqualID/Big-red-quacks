@@ -18,7 +18,7 @@ class Controller:
                                ["Pakistan", 200000000, 200000000, 1.09, 300000, 1.025, 0, 0, 0, 300000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : 0, "Korea" : 0, "China" : 1, "Pakistan" : -1}],
                                ["Korea", 25000000, 24750000, 1.02, 100000, 1.02, 0, 0, 0, 100000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : 1, "Korea" : -1, "China" : 0, "Pakistan" : 0}]]
 
-        self.cities = { "USA" : { "Chicago" : [23333333.3, 0], "Salt Lake" : [23333333.3, 0], "Los Angeles" : [23333333.3, 0], "Jacksonville" : [23333333.3, 0], "Seattle" : [23333333.3, 0], "San Fransisco" : [23333333.3, 0], "Houston" : [23333333.3, 0], "Austin" : [23333333.3, 0], "Washington DC" : [23333333.3, 0], "Pheonix" : [23333333.3, 0], "St. Louis" : [23333333.3, 0], "Columbus" : [23333333.3, 0], "Charlotte" : [23333333.3, 0], "Denver" : [23333333.3, 0]},
+        self.cities = { "USA" : { "Chicago" : [23333333.3, 0], "Salt Lake" : [23333333.3, 0], "Los Angeles" : [23333333.3, 0], "Jacksonville" : [23333333.3, 0], "Seattle" : [23333333.3, 0], "San Fransisco" : [23333333.3, 0], "Charolette" : [23333333.3, 0], "Austin" : [23333333.3, 0], "Washington DC" : [23333333.3, 0], "Pheonix" : [23333333.3, 0], "St. Louis" : [23333333.3, 0], "Columbus" : [23333333.3, 0], "New York City" : [23333333.3, 0], "Denver" : [23333333.3, 0]},
                         "China" : { "Urumqi" : [233333333.3, 0], "Chengdu" : [233333333.3, 0], "Beijing" : [233333333.3, 0], "Guangzhou" : [233333333.3, 0], "Shanghai" : [233333333.3, 0], "Wuhan" : [233333333.3, 0]},
                         "Russia" : { "Moscow" : [18125000, 0], "St. Petersburg" : [18125000, 0], "Novosibirsk" : [18125000, 0], "Krasnoyarsk" : [18125000, 0], "Irkutsk" : [18125000, 0], "Arkhangel'sk" : [18125000, 0], "Magadan" : [18125000, 0]},
                         "Pakistan" : { "Islamabad" : [66666666.7, 0], "Karachi" : [66666666.7, 0], "Multan" : [66666666.7, 0]},
@@ -199,6 +199,10 @@ class Controller:
             pygame.event.wait()
             pygame.display.flip()
 
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+
 
     def startHud(self, player, turns):
         font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
@@ -238,6 +242,7 @@ class Controller:
 
 
 
+
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
         self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][1], self.country_values[self.selected][2], self.country_values[self.selected][3], self.country_values[self.selected][4], self.country_values[self.selected][5], self.country_values[self.selected][6], self.country_values[self.selected][7], self.country_values[self.selected][8], self.country_values[self.selected][9], self.country_values[self.selected][10], self.country_values[self.selected][11],self.cities[self.country_values[self.selected][0]])
@@ -247,128 +252,423 @@ class Controller:
                 allPlayers.append(PlayerCountry(self.country_values[i][0], self.country_values[i][1], self.country_values[i][2], self.country_values[i][3], self.country_values[i][4], self.country_values[i][5], self.country_values[i][6], self.country_values[i][7], self.country_values[i][8], self.country_values[i][9], self.country_values[i][10], self.country_values[i][11],self.cities[self.country_values[i][0]]))
         turns = 0
         cityselection = -1
-        font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
         #ayy weed lmao
+        bomb = False
+        aa = False
+        targetCity = ""
+        targetCountry = None
         while self.state == "GAME":
+            font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
             background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
             self.screen.blit(background, (0,0))
             self.startHud(self.player, turns)
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
-
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
             if click[0] == 1 and mouse[0] in range(385,600) and mouse[1] in range(285,600):
-                # pygame.draw(rect.screen, (0,0,0), ())
-                self.screen.blit(font.render("NYC", True, (0,0,0)), (375,301))
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "New York City"
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (333,285)) #Chicago
             if click[0] == 1 and mouse[0] in range(333,346) and mouse[1] in range(220,270):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Chicago"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (363,300)) #DC
             if click[0] == 1 and mouse[0] in range(363,376) and mouse[1] in range(300,313):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Washington DC"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (213,300)) #SLC
             if click[0] == 1 and mouse[0] in range(213,226) and mouse[1] in range(300,313):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                argetCity = "Salt Lake"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (183,315)) #LA
             if click[0] == 1 and mouse[0] in range(183,196) and mouse[1] in range(315,328):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Los Angeles"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (340,335)) #Jacksonville
             if click[0] == 1 and mouse[0] in range(340,353) and mouse[1] in range(335,348):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Jacksonville"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (180,265)) #Seattle
             if click[0] == 1 and mouse[0] in range(180,193) and mouse[1] in range(265,278):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Seattle"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (180,295)) #SF
             if click[0] == 1 and mouse[0] in range(180,193) and mouse[1] in range(295,308):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "San Fransisco"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (275,335)) #Ausin
             if click[0] == 1 and mouse[0] in range(275,288) and mouse[1] in range(335,348):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Austin"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (220,320)) #Pheonix
             if click[0] == 1 and mouse[0] in range(220,233) and mouse[1] in range(320,333):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Pheonix"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (305,305)) #Saint Louis
             if click[0] == 1 and mouse[0] in range(305,318) and mouse[1] in range(305,318):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Saint Lois"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (335,300)) #Columbus
             if click[0] == 1 and mouse[0] in range(335,348) and mouse[1] in range(300,313):
-                print("test")
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (350,310)) #Charolette
-            if click[0] == 1 and mouse[0] in range(350,363) and mouse[1] in range(310,323):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Columbus"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (245,305)) #Denver
             if click[0] == 1 and mouse[0] in range(245,258) and mouse[1] in range(305,318):
-                print("test")
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Denver"
+
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (350,310)) #Charolette
+            if click[0] == 1 and mouse[0] in range(350,363) and mouse[1] in range(310,323):
+                targetCountry = "USA"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Charolette"
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1025,288)) #Urumqi
             if click[0] == 1 and mouse[0] in range(1025,1038) and mouse[1] in range(288,301):
-                print("test")
+                targetCountry = "China"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Urumqi"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1085,340)) #Chendu
             if click[0] == 1 and mouse[0] in range(1085,1098) and mouse[1] in range(340,353):
-                print("test")
+                targetCountry = "China"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Chendu"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1145,300)) #Beijing
             if click[0] == 1 and mouse[0] in range(1145,1158) and mouse[1] in range(300,313):
-                print("test")
+                targetCountry = "China"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Beijing"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1125,370)) #Guangzhou
             if click[0] == 1 and mouse[0] in range(1125,1138) and mouse[1] in range(370,383):
-                print("test")
+                targetCountry = "China"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Guangzhou"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1155,335)) #Shanghai
             if click[0] == 1 and mouse[0] in range(1155,1168) and mouse[1] in range(335,348):
-                print("test")
+                targetCountry = "China"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Shanghai"
+
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1120,340)) #Wuhan
             if click[0] == 1 and mouse[0] in range(1120,1133) and mouse[1] in range(340,353):
-                print("test")
+                targetCountry = "China"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Wuhan"
+
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
             if click[0] == 1 and mouse[0] in range(1180,1193) and mouse[1] in range(300,313):
-                print("test")
+                targetCountry = "Korea"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Pyongyang"
+
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (668,246)) #London
             if click[0] == 1 and mouse[0] in range(668,681) and mouse[1] in range(246,259):
-                print("test")
+                targetCountry = "UK"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "London"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (655,232)) #Manchester
             if click[0] == 1 and mouse[0] in range(655,668) and mouse[1] in range(232,245):
-                print("test")
+                targetCountry = "UK"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Manchester"
+
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (960,330)) #Islamabad
             if click[0] == 1 and mouse[0] in range(960,973) and mouse[1] in range(330,343):
-                print("test")
+                targetCountry = "Pakistan"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Islamabad"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (955,345)) #Multan
             if click[0] == 1 and mouse[0] in range(955,968) and mouse[1] in range(345,358):
-                print("test")
+                targetCountry = "Pakistan"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Multan"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (945,365)) #Karachi
             if click[0] == 1 and mouse[0] in range(945,958) and mouse[1] in range(365,378):
-                print("test")
+                targetCountry = "Pakistan"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Karachi"
+
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (805,225)) #Moscow
             if click[0] == 1 and mouse[0] in range(805,818) and mouse[1] in range(225,238):
-                print("test")
+                targetCountry = "Russia"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Moscow"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1020,230)) #Novosibirsk
             if click[0] == 1 and mouse[0] in range(1020,1033) and mouse[1] in range(230,243):
-                print("test")
+                targetCountry = "Russia"
+
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Novosibirsk"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (800,210)) #St. Pertersburg
             if click[0] == 1 and mouse[0] in range(800,813) and mouse[1] in range(210,223):
-                print("test")
+                targetCountry = "Russia"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "St. Petersburg"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1220,250)) #Khabarovsk
             if click[0] == 1 and mouse[0] in range(1220,1233) and mouse[1] in range(250,263):
-                print("test")
+                targetCountry = "Russia"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Khabarovsk"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1090,240)) #Irkutsk
             if click[0] == 1 and mouse[0] in range(1090,1103) and mouse[1] in range(240,253):
-                print("test")
+                targetCountry = "Russia"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Irkutsk"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (830,270)) #Krasnodar
             if click[0] == 1 and mouse[0] in range(830,843) and mouse[1] in range(270,283):
-                print("test")
+                targetCountry = "Russia"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Krasnodar"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (1280,205)) #Magadan
             if click[0] == 1 and mouse[0] in range(1280,1293) and mouse[1] in range(205,218):
-                print("test")
+                targetCountry = "Russia"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                targetCity = "Magadan"
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (825,205)) #Arkhangel'sk
             if click[0] == 1 and mouse[0] in range(825,838) and mouse[1] in range(205,218):
-                print("test")
+                targetCountry = "Russia"
+                if self.player.name != targetCountry:
+                    aa = False
+                    bomb = True
+                else:
+                    bomb = False
+                    aa = True
+                    targetCity = "Arkhangel'sk"
+
+            if bomb:
+                self.screen.blit(font.render("Fire Nuke?", True, (255,255,255)), (260,760))
+                if click[0] == True and mouse[0] in range(255,430) and mouse[1] in range(755,260):
+                    launchNuke(self.player,targetCountry , targetCity)
+                aa = False
+                targetCountry = ""
+
+            if aa:
+                self.screen.blit(font.render("Build anti Nuke?", True, (255,255,255)), (860,265))
+                if click[0] == True and mouse[0] in range(855,1030) and mouse[1] in range(855,260):
+                    makeAntiAir(self.player, targetCity)
+                bomb = False
+
+            font = pygame.font.Font("assets/fonts/pixelplay.ttf", 28)
+            self.screen.blit(font.render("Buy Nuke?", True, (255,255,255)), (992,703))
+            if click[0] == 1 and mouse[0] in range(985,1100) and mouse[1] in range(710,735):
+                makeNuke(self.player)
 
             if click[0] == 1 and mouse[0] in range(0,100) and mouse[1] in range(0,100):
                 sys.exit()
             pygame.event.wait()
             pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
 
 
     def endLoop(self):
