@@ -133,6 +133,12 @@ def researchPurchase(country, researchType):
         if(treasury > cost):
             country.treasury = country.treasury - cost
             country.nukeResearch += 1
+    elif(researchType == "Food Production"):
+        costs = country.fProduction * 12500
+        if(treasury > cost):
+            country.treasury -= costs
+            country.fProduction += 1
+
 
 def makeNuke(c1):
     if (c1.treasury >= 3000000):
