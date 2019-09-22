@@ -64,11 +64,7 @@ def fTrage(country1, country2, resource1, amount1, resource2, amount2): #f = foo
         country1.nukes = country1.nukes + amount1
 
 def launchNuke(c1, c2, target): # c1 is your own country, c2 is the opposing country, target is the specific city
-<<<<<<< HEAD
-    if (c1):
-=======
     if (c1.faValues.get(c2.name) == 0):
->>>>>>> 07e6cac5c0785460a6cbf78ffea6f881226dddcc
         if (c1.nuke > 0):
             c1.nuke = c1.nuke - 1
             if (c2.cityDictionary.get(target)[1] != 0):

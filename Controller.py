@@ -2,26 +2,27 @@ import sys
 import pygame
 import time
 import helper_functions
-import PlayerCountry
+from PlayerCountry import PlayerCountry
 
 
 
 class Controller:
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
-        # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
-        self.country_values = [["USA", 350000000, 350000000, 1000000, 0, 0, 0, 0, 0, 0, {"US" : -1, "UK" : 1, "Russia" : 0, "NK" : 0, "China" : 0, "Pakistan" : 0}],
-                               ["UK", 66000000, 66250000, 250000, 0, 0, 0, 0, 0, 0,{"US" : 1, "UK" : -1, "Russia" : 0, "NK" : 0, "China" : 0, "Pakistan" : 0}],
-                               ["Russia", 145000000, 144500000, 800000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : -1, "NK" : 1, "China" : 0, "Pakistan" : 0}],
-                               ["Korea", 25000000, 24750000, 100000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : 1, "NK" : -1, "China" : 0, "Pakistan" : 0}],
-                               ["China", 1400000000, 1400000000, 700000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : 0, "NK" : 0, "China" : -1, "Pakistan" : 1}],
-                               ["Pakistan", 200000000, 200000000, 300000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : 0, "NK" : 0, "China" : 1, "Pakistan" : -1}]]
+
+        # IN ORDER:             Name, population, cReasources, gRate, GDP, gpdGrowth, nukes, antiair, food production, treasury, #nukes, faValues]
+        self.country_values = [["USA", 350000000, 350000000, 1.05, 1000000, 1.03, 0, 0, 0, 1000000*5, 0, {"USA" : -1, "UK" : 1, "Russia" : 0, "Korea" : 0, "China" : 0, "Pakistan" : 0}],
+                               ["UK", 66000000, 66250000, 1.04, 250000, 1.02, 0, 0, 0, 250000*5, 0, {"USA" : 1, "UK" : -1, "Russia" : 0, "Korea" : 0, "China" : 0, "Pakistan" : 0}],
+                               ["Russia", 145000000, 144500000, 1.08, 800000, 1.01, 0, 0, 0, 800000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : -1, "Korea" : 1, "China" : 0, "Pakistan" : 0}],
+                               ["Korea", 25000000, 24750000, 1.02, 100000, 1.02, 0, 0, 0, 100000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : 1, "Korea" : -1, "China" : 0, "Pakistan" : 0}],
+                               ["China", 1400000000, 1400000000, 1.03, 700000, 1.04, 0, 0, 0, 700000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : 0, "Korea" : 0, "China" : -1, "Pakistan" : 1}],
+                               ["Pakistan", 200000000, 200000000, 1.09, 300000, 1.025, 0, 0, 0, 300000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : 0, "Korea" : 0, "China" : 1, "Pakistan" : -1}]]
         self.cities = { "USA" : { "Chicago" : [23333333.3, 0], "Salt Lake" : [23333333.3, 0], "Los Angeles" : [23333333.3, 0], "Jacksonville" : [23333333.3, 0], "Seattle" : [23333333.3, 0], "San Fransisco" : [23333333.3, 0], "Houston" : [23333333.3, 0], "Austin" : [23333333.3, 0], "Washington DC" : [23333333.3, 0], "Pheonix" : [23333333.3, 0], "St. Louis" : [23333333.3, 0], "Columbus" : [23333333.3, 0], "Charlotte" : [23333333.3, 0], "Denver" : [23333333.3, 0]},
                         "China" : { "Urumqi" : [233333333.3, 0], "Chengdu" : [233333333.3, 0], "Beijing" : [233333333.3, 0], "Guangzhou" : [233333333.3, 0], "Shanghai" : [233333333.3, 0], "Wuhan" : [233333333.3, 0]},
                         "Russia" : { "Moscow" : [18125000, 0], "St. Petersburg" : [18125000, 0], "Novosibirsk" : [18125000, 0], "Krasnoyarsk" : [18125000, 0], "Irkutsk" : [18125000, 0], "Arkhangel'sk" : [18125000, 0], "Magadan" : [18125000, 0]},
                         "Pakistan" : { "Islamabad" : [66666666.7, 0], "Karachi" : [66666666.7, 0], "Multan" : [66666666.7, 0]},
                         "UK" : {"London" : [33000000, 0], "Manchester" : [33000000, 0]},
-                        "North Korea" : {"Pyongyang" : [25000000, 0]}
+                        "Korea" : {"Pyongyang" : [25000000, 0]}
                             }
         self.width = width
         self.height = height
@@ -199,7 +200,8 @@ class Controller:
 
 
     def startHud(self, player, turns):
-        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.jpg").convert_alpha(),(1440,630)), (0,330))
+        font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.png").convert_alpha(),(1440,630)), (0,330))
 
         if self.selected == 0:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.jpg").convert_alpha(), (195,195)), (20,785))
@@ -222,7 +224,7 @@ class Controller:
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
-        self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][0],self.country_values[self.selected][1],self.country_values[self.selected][2],self.country_values[self.selected][3],self.country_values[self.selected][4],self.country_values[self.selected][5],self.country_values[self.selected][6],self.country_values[self.selected][7],self.country_values[self.selected][8],self.country_values[self.selected][9],self.country_values[self.selected][10],self.country_values[self.selected][11],self.country_values[self.selected][12],self.country_values[self.selected][13],self.country_values[self.selected][14])
+        self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][1],self.country_values[self.selected][2],self.country_values[self.selected][3],self.country_values[self.selected][4],self.country_values[self.selected][5],self.country_values[self.selected][6],self.country_values[self.selected][7],self.country_values[self.selected][8],self.country_values[self.selected][9],self.country_values[self.selected][10],self.country_values[self.selected][11],self.cities[self.country_values[self.selected][0]])
         turns = 0
         cityselection = -1
         font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
@@ -230,13 +232,13 @@ class Controller:
         while self.state == "GAME":
             background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
             self.screen.blit(background, (0,0))
-            self.startHud(player, turns)
+            self.startHud(self.player, turns)
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
             if click[0] == 1 and mouse[0] in range(385,600) and mouse[1] in range(285,600):
-                pygame.draw(rect.screen, (0,0,0), ())
+                # pygame.draw(rect.screen, (0,0,0), ())
                 self.screen.blit(font.render("NYC", True, (0,0,0)), (375,301))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (333,285)) #Chicago
             if click[0] == 1 and mouse[0] in range(333,346) and mouse[1] in range(220,270):
