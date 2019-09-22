@@ -9,13 +9,13 @@ class Controller:
     selected = -1
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
-        # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
-        self.country_values = [["USA", 350000000, 350000000, 1000000, 0, 0, 0, 0, 0, 0, {"US" : -1, "UK" : 1, "Russia" : 0, "NK" : 0, "China" : 0, "Pakistan" : 0}],
-                               ["UK", 66000000, 66250000, 250000, 0, 0, 0, 0, 0, 0,{"US" : 1, "UK" : -1, "Russia" : 0, "NK" : 0, "China" : 0, "Pakistan" : 0}],
-                               ["Russia", 145000000, 144500000, 800000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : -1, "NK" : 1, "China" : 0, "Pakistan" : 0}],
-                               ["Korea", 25000000, 24750000, 100000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : 1, "NK" : -1, "China" : 0, "Pakistan" : 0}],
-                               ["China", 1400000000, 1400000000, 700000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : 0, "NK" : 0, "China" : -1, "Pakistan" : 1}],
-                               ["Pakistan", 200000000, 200000000, 300000, 0, 0, 0, 0, 0, 0, {"US" : 0, "UK" : 0, "Russia" : 0, "NK" : 0, "China" : 1, "Pakistan" : -1}]]
+        # IN ORDER:             Name, population, cReasources, gRate, GDP, gpdGrowth, nukes, antiair, food production, treasury, #nukes, faValues]
+        self.country_values = [["USA", 350000000, 350000000, 1.05, 1000000, 1.03, 0, 0, 0, 1000000*5, 0, {"US" : -1, "UK" : 1, "Russia" : 0, "NK" : 0, "China" : 0, "Pakistan" : 0}],
+                               ["UK", 66000000, 66250000, 1.04, 250000, 1.02, 0, 0, 0, 250000*5, 0, {"US" : 1, "UK" : -1, "Russia" : 0, "NK" : 0, "China" : 0, "Pakistan" : 0}],
+                               ["Russia", 145000000, 144500000, 1.08, 800000, 1.01, 0, 0, 0, 800000*5, 0, {"US" : 0, "UK" : 0, "Russia" : -1, "NK" : 1, "China" : 0, "Pakistan" : 0}],
+                               ["Korea", 25000000, 24750000, 1.02, 100000, 1.02, 0, 0, 0, 100000*5, 0, {"US" : 0, "UK" : 0, "Russia" : 1, "NK" : -1, "China" : 0, "Pakistan" : 0}],
+                               ["China", 1400000000, 1400000000, 1.03, 700000, 1.04, 0, 0, 0, 700000*5, 0, {"US" : 0, "UK" : 0, "Russia" : 0, "NK" : 0, "China" : -1, "Pakistan" : 1}],
+                               ["Pakistan", 200000000, 200000000, 1.09, 300000, 1.025, 0, 0, 0, 300000*5, 0, {"US" : 0, "UK" : 0, "Russia" : 0, "NK" : 0, "China" : 1, "Pakistan" : -1}]]
         self.cities = { "USA" : { "Chicago" : [23333333.3, 0], "Salt Lake" : [23333333.3, 0], "Los Angeles" : [23333333.3, 0], "Jacksonville" : [23333333.3, 0], "Seattle" : [23333333.3, 0], "San Fransisco" : [23333333.3, 0], "Houston" : [23333333.3, 0], "Austin" : [23333333.3, 0], "Washington DC" : [23333333.3, 0], "Pheonix" : [23333333.3, 0], "St. Louis" : [23333333.3, 0], "Columbus" : [23333333.3, 0], "Charlotte" : [23333333.3, 0], "Denver" : [23333333.3, 0]},
                         "China" : { "Urumqi" : [233333333.3, 0], "Chengdu" : [233333333.3, 0], "Beijing" : [233333333.3, 0], "Guangzhou" : [233333333.3, 0], "Shanghai" : [233333333.3, 0], "Wuhan" : [233333333.3, 0]},
                         "Russia" : { "Moscow" : [18125000, 0], "St. Petersburg" : [18125000, 0], "Novosibirsk" : [18125000, 0], "Krasnoyarsk" : [18125000, 0], "Irkutsk" : [18125000, 0], "Arkhangel'sk" : [18125000, 0], "Magadan" : [18125000, 0]},
