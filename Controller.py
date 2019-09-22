@@ -1,6 +1,7 @@
 import sys
 import pygame
 import time
+# import helper_functions
 
 
 
@@ -49,7 +50,7 @@ class Controller:
         music = pygame.mixer.Sound("assets/papers.wav")
         pygame.mixer.Sound.play(music)
 
-        while(self.state == "START2"):
+        while(self.state == "START"):
             background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(640*2+160, 480*2))
             self.screen.blit(background, (0,0))
             for event in pygame.event.get():
