@@ -64,7 +64,7 @@ def fTrage(country1, country2, resource1, amount1, resource2, amount2): #f = foo
         country1.nukes = country1.nukes + amount1
 
 def launchNuke(c1, c2, target): # c1 is your own country, c2 is the opposing country, target is the specific city
-    if (c1)
+    if (c1.faValues.get(c2.name) == 0):
         if (c1.nuke > 0):
             c1.nuke = c1.nuke - 1
             if (c2.cityDictionary.get(target)[1] != 0):
@@ -117,6 +117,8 @@ def launchNuke(c1, c2, target): # c1 is your own country, c2 is the opposing cou
                     elif(diff == 1):
                         c2.cityDictionary.get(target)[0] = initPop*.95;
                         c2.population -= initPop*.05
+    else:
+        return False
 
 
 def researchPurchase(country, researchType):
