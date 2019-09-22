@@ -64,58 +64,59 @@ def fTrage(country1, country2, resource1, amount1, resource2, amount2): #f = foo
         country1.nukes = country1.nukes + amount1
 
 def launchNuke(c1, c2, target): # c1 is your own country, c2 is the opposing country, target is the specific city
-    if (c1.nuke > 0):
-        c1.nuke = c1.nuke - 1
-        if (c2.cityDictionary.get(target)[1] != 0):
-            c2.cityDictionary.get(target)[1] = c2.cityDictionary.get(target)[1] - 1
-            if (c1.nukeResearch > c2.aaResearch):
-                diff = c1.nukeResearch - c2.aaResearch
-                initPop = c2.cityDictionary.get(target)[0]
-                if(diff > 14):
-                    c2.cityDictionary.get(target)[0] = 0;
-                    c2.population -= initPop
-                elif(diff == 14):
-                    c2.cityDictionary.get(target)[0] = initPop*.01;
-                    c2.population -= initPop*.99
-                elif(diff == 13):
-                    c2.cityDictionary.get(target)[0] = initPop*.02;
-                    c2.population -= initPop*.98
-                elif(diff == 12):
-                    c2.cityDictionary.get(target)[0] = initPop*.03;
-                    c2.population -= initPop*.97
-                elif(diff == 11):
-                    c2.cityDictionary.get(target)[0] = initPop*.04;
-                    c2.population -= initPop*.96
-                elif(diff == 10):
-                    c2.cityDictionary.get(target)[0] = initPop*.05;
-                    c2.population -= initPop*.95
-                elif(diff == 9):
-                    c2.cityDictionary.get(target)[0] = initPop*.15;
-                    c2.population -= initPop*.85
-                elif(diff == 8):
-                    c2.cityDictionary.get(target)[0] = initPop*.25;
-                    c2.population -= initPop*.75
-                elif(diff == 7):
-                    c2.cityDictionary.get(target)[0] = initPop*.35;
-                    c2.population -= initPop*.65
-                elif(diff == 6):
-                    c2.cityDictionary.get(target)[0] = initPop*.45;
-                    c2.population -= initPop*.55
-                elif(diff == 5):
-                    c2.cityDictionary.get(target)[0] = initPop*.6;
-                    c2.population -= initPop*.4
-                elif(diff == 4):
-                    c2.cityDictionary.get(target)[0] = initPop*.7;
-                    c2.population -= initPop*.3
-                elif(diff == 3):
-                    c2.cityDictionary.get(target)[0] = initPop*.8;
-                    c2.population -= initPop*.2
-                elif(diff == 2):
-                    c2.cityDictionary.get(target)[0] = initPop*.9;
-                    c2.population -= initPop*.1
-                elif(diff == 1):
-                    c2.cityDictionary.get(target)[0] = initPop*.95;
-                    c2.population -= initPop*.05
+    if (c1)
+        if (c1.nuke > 0):
+            c1.nuke = c1.nuke - 1
+            if (c2.cityDictionary.get(target)[1] != 0):
+                c2.cityDictionary.get(target)[1] = c2.cityDictionary.get(target)[1] - 1
+                if (c1.nukeResearch > c2.aaResearch):
+                    diff = c1.nukeResearch - c2.aaResearch
+                    initPop = c2.cityDictionary.get(target)[0]
+                    if(diff > 14):
+                        c2.cityDictionary.get(target)[0] = 0;
+                        c2.population -= initPop
+                    elif(diff == 14):
+                        c2.cityDictionary.get(target)[0] = initPop*.01;
+                        c2.population -= initPop*.99
+                    elif(diff == 13):
+                        c2.cityDictionary.get(target)[0] = initPop*.02;
+                        c2.population -= initPop*.98
+                    elif(diff == 12):
+                        c2.cityDictionary.get(target)[0] = initPop*.03;
+                        c2.population -= initPop*.97
+                    elif(diff == 11):
+                        c2.cityDictionary.get(target)[0] = initPop*.04;
+                        c2.population -= initPop*.96
+                    elif(diff == 10):
+                        c2.cityDictionary.get(target)[0] = initPop*.05;
+                        c2.population -= initPop*.95
+                    elif(diff == 9):
+                        c2.cityDictionary.get(target)[0] = initPop*.15;
+                        c2.population -= initPop*.85
+                    elif(diff == 8):
+                        c2.cityDictionary.get(target)[0] = initPop*.25;
+                        c2.population -= initPop*.75
+                    elif(diff == 7):
+                        c2.cityDictionary.get(target)[0] = initPop*.35;
+                        c2.population -= initPop*.65
+                    elif(diff == 6):
+                        c2.cityDictionary.get(target)[0] = initPop*.45;
+                        c2.population -= initPop*.55
+                    elif(diff == 5):
+                        c2.cityDictionary.get(target)[0] = initPop*.6;
+                        c2.population -= initPop*.4
+                    elif(diff == 4):
+                        c2.cityDictionary.get(target)[0] = initPop*.7;
+                        c2.population -= initPop*.3
+                    elif(diff == 3):
+                        c2.cityDictionary.get(target)[0] = initPop*.8;
+                        c2.population -= initPop*.2
+                    elif(diff == 2):
+                        c2.cityDictionary.get(target)[0] = initPop*.9;
+                        c2.population -= initPop*.1
+                    elif(diff == 1):
+                        c2.cityDictionary.get(target)[0] = initPop*.95;
+                        c2.population -= initPop*.05
 
 
 def researchPurchase(country, researchType):
@@ -132,3 +133,13 @@ def researchPurchase(country, researchType):
         if(treasury > cost):
             country.treasury = country.treasury - cost
             country.nukeResearch += 1
+
+def makeNuke(c1):
+    if (c1.treasury >= 3000000):
+        c1.treasury -= 3000000
+        c1.nukes += 1
+
+def makeAntiAir(c1, city):
+    if (c1.treasury >= 1500000):
+        c1.treasury -= 1500000
+        c1.cityDictionary.get(city)[1] + 1

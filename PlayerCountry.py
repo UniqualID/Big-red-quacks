@@ -3,8 +3,7 @@
 class PlayerCountry:
 
 
-    def __init__(self, name, population, cResources, gRate, GDP, gdpGrowth, nukeResearch, aaResearch, mProduction, fProduction,
-    arResarch, education, treasury, nukes, faValues, nukeDictionary, cityDictionary):  #publicOp
+    def __init__(self, name, population, cResources, gRate, GDP, gdpGrowth, nukeResearch, aaResearch, mProduction, fProduction, treasury, nukes, faValues, nukeDictionary, cityDictionary):  #publicOp, education, arResarch
 
         self.name = name
         self.population = population
@@ -15,11 +14,11 @@ class PlayerCountry:
         self.gdpGrowth = gdpGrowth
         self.nukeResearch = nukeResearch
         self.aaResearch = aaResearch
-        self.mProduction = mProduction
+        #self.mProduction = mProduction
         self.fProduction = fProduction
-        self.arResarch = arResarch
+        #self.arResarch = arResarch
         #self.publicOp = publicOp
-        self.education = education
+        #self.education = education
         self.treasury = treasury
         self.nukes = nukes
         self.faValues = faValues
