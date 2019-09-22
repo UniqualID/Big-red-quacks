@@ -362,7 +362,7 @@ class Controller:
             ##### END TURN BUTTON #####
             pygame.draw.rect(self.screen, (88,88,88), (1170, 730, 220, 110)) #x, y, len, wid
             font2 = pygame.font.Font("assets/fonts/pixelplay.ttf", 45)
-            self.screen.blit(font2.render("End Turn", True, (0,0,0)), (1215,755))
+            self.screen.blit(font2.render("End Turn", True, (255,255,255)), (1215,755))
             if click[0] == 1 and mouse[0] in range(1170, 1440) and mouse[1] in range(730, 1040):
                 self.turnCounter = self.turnCounter + 1
 
