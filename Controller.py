@@ -26,7 +26,7 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "GAME"
+        self.state = "startLoop2"
         pygame.font.init()
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
