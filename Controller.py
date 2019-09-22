@@ -222,7 +222,7 @@ class Controller:
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
-        self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0])
+        self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][0],self.country_values[self.selected][1],self.country_values[self.selected][2],self.country_values[self.selected][3],self.country_values[self.selected][4],self.country_values[self.selected][5],self.country_values[self.selected][6],self.country_values[self.selected][7],self.country_values[self.selected][8],self.country_values[self.selected][9],self.country_values[self.selected][10],self.country_values[self.selected][11],self.country_values[self.selected][12],self.country_values[self.selected][13],self.country_values[self.selected][14])
         turns = 0
         cityselection = -1
         font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
@@ -236,9 +236,8 @@ class Controller:
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
             if click[0] == 1 and mouse[0] in range(385,600) and mouse[1] in range(285,600):
-                CityName = font.render("NYC", True, (0,0,0))
                 pygame.draw(rect.screen, (0,0,0), ())
-                self.screen.blit
+                self.screen.blit(font.render("NYC", True, (0,0,0)), (375,301))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (333,285)) #Chicago
             if click[0] == 1 and mouse[0] in range(333,346) and mouse[1] in range(220,270):
                 print("test")
