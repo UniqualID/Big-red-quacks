@@ -225,3 +225,5 @@ def agentCountryTurn(country, players):
             targetCities.append(k)
         targetCity = targetCountry.cityDictionary.get(targetCities[random.randint(0, len(targetCities))])
         launchNuke(country, targetCountry, targetCity)
+
+    country.update()

@@ -374,3 +374,10 @@ class Controller:
 
     def endLoop(self):
         pass
+
+    def endTurn(players):
+        for player in players:
+            if self.player.name != player.name:
+                agentCountryTurn(player, players)
+        self.player.update()
+        self.turnCounter += self.turnCounter

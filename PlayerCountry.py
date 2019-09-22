@@ -26,21 +26,20 @@ class PlayerCountry:
         self.cityDictionary = cityDictionary
 
 
-    def update(self, population, cResources, gRate, GDP, gdpGrowth):  #publicOp
+    def update(self):  #publicOp
 
         oldPop = self.population
         oldGDP = self.GDP
 
-
         #Updates population
-        self.population = ((cResources-population)*gRate) + population
+        self.population = ((self.cResources-self.population)*self.gRate) + self.population
 
         #Updates population in all cities
         for (k, v) in self.cityDictionary.items():
-            v[0] = v[0] * (population/oldPop)
+            v[0] = v[0] * (self.population/oldPop)
 
         #Updates GDP
-        self.GDP = GDP + (population - startingPop)*gdpGrowth # ADD TRADE DEALS IN TURN
+        self.GDP = self.GDP + (self.population - startingPop)*self.gdpGrowth # ADD TRADE DEALS IN TURN
 
         #Refreshes Treasury
         self.treasury = self.treasury + self.GDP
