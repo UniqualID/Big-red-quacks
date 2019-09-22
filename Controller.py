@@ -235,8 +235,8 @@ class Controller:
         self.screen.blit(font.render("food prod.",True, (255,255,255)), (boxX+200, boxY+10))
         self.screen.blit(font.render(str(player.nukes), True, (255,255,255)), (boxX+350, boxY+35))
         self.screen.blit(font.render("nukes",True, (255,255,255)), (boxX+200, boxY+35))
-        self.screen.blit(font.render(str(player.faValues[player.name]), True, (255,255,255)), (boxX+350, boxY+60))
-        self.screen.blit(font.render("foregn aff.",True, (255,255,255)), (boxX+200, boxY+60))
+        self.screen.blit(font.render(str(player.treasury    ), True, (255,255,255)), (boxX+350, boxY+60))
+        self.screen.blit(font.render("treasury.",True, (255,255,255)), (boxX+200, boxY+60))
 
 
 
@@ -245,7 +245,11 @@ class Controller:
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
-        self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][1],self.country_values[self.selected][2],self.country_values[self.selected][3],self.country_values[self.selected][4],self.country_values[self.selected][5],self.country_values[self.selected][6],self.country_values[self.selected][7],self.country_values[self.selected][8],self.country_values[self.selected][9],self.country_values[self.selected][10],self.country_values[self.selected][11],self.cities[self.country_values[self.selected][0]])
+        self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][1], self.country_values[self.selected][2], self.country_values[self.selected][3], self.country_values[self.selected][4], self.country_values[self.selected][5], self.country_values[self.selected][6], self.country_values[self.selected][7], self.country_values[self.selected][8], self.country_values[self.selected][9], self.country_values[self.selected][10], self.country_values[self.selected][11],self.cities[self.country_values[self.selected][0]])
+        allPlayers = [self.player]
+        for i in range(6):
+            if i != self.selected:
+                allPlayers.append(PlayerCountry(self.country_values[i][0], self.country_values[i][1], self.country_values[i][2], self.country_values[i][3], self.country_values[i][4], self.country_values[i][5], self.country_values[i][6], self.country_values[i][7], self.country_values[i][8], self.country_values[i][9], self.country_values[i][10], self.country_values[i][11],self.cities[self.country_values[i][0]]))
         turns = 0
         cityselection = -1
         #ayy weed lmao
@@ -641,24 +645,27 @@ class Controller:
 
             if bomb:
                 self.screen.blit(font.render("Fire Nuke?", True, (255,255,255)), (260,760))
-                if click[0] == True and mouse[0] in range(255,430) and mouse[1] in range(755,260):
-                    launchNuke(self.player,targetCountry , targetCity)
+                if click[0] == True and mouse[0] in range(255,430) and mouse[1] in range(755,960):
+                    enemy = None
+                    for player in allPlayers:
+                        if targetCountry == player.name:
+                            enemy = player
+                    helper_functions.launchNuke(self.player, enemy , targetCity)
                 aa = False
-                targetCountry = ""
 
             if aa:
-                self.screen.blit(font.render("Build anti Nuke?", True, (255,255,255)), (860,265))
-                if click[0] == True and mouse[0] in range(855,1030) and mouse[1] in range(855,260):
-                    makeAntiAir(self.player, targetCity)
+                self.screen.blit(font.render("Build anti Nuke?", True, (255,255,255)), (860,835))
+                if click[0] == True and mouse[0] in range(855,1030) and mouse[1] in range(835,960):
+                    helper_functions.makeAntiAir(self.player, targetCity)
                 bomb = False
 
             font = pygame.font.Font("assets/fonts/pixelplay.ttf", 28)
             self.screen.blit(font.render("Buy Nuke?", True, (255,255,255)), (992,703))
             if click[0] == 1 and mouse[0] in range(985,1100) and mouse[1] in range(710,735):
-                makeNuke(self.player)
+                helper_functions.makeNuke(self.player)
 
             ##### END TURN BUTTON #####
-            pygame.draw.rect(self.screen, (88,88,88), (1170, 730, 220, 110)) #x, y, len, wid
+            # pygame.draw.rect(self.screen, (88,88,88), (1170, 730, 220, 110)) #x, y, len, wid
             font2 = pygame.font.Font("assets/fonts/pixelplay.ttf", 45)
             self.screen.blit(font2.render("End Turn", True, (255,255,255)), (1215,755))
             if click[0] == 1 and mouse[0] in range(1170, 1440) and mouse[1] in range(730, 1040):
@@ -668,6 +675,8 @@ class Controller:
                 sys.exit()
             pygame.event.wait()
             pygame.display.flip()
+
+            self.screen.blit(font2.render(str(self.turnCounter), True, (0,0,0)), (10,0))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

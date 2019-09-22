@@ -65,9 +65,12 @@ def fTrage(country1, country2, resource1, amount1, resource2, amount2): #f = foo
         country1.nukes = country1.nukes + amount1
 
 def launchNuke(c1, c2, target): # c1 is your own country, c2 is the opposing country, target is the specific city
+    print("LaunchNuke Called")
     if (c1.faValues.get(c2.name) == 0):
-        if (c1.nuke > 0):
-            c1.nuke = c1.nuke - 1
+        print("Valid Target")
+        if (c1.nukes > 0):
+            print("Has Nukes Available")
+            c1.nukes = c1.nukes - 1
             if (c2.cityDictionary.get(target)[1] != 0):
                 c2.cityDictionary.get(target)[1] = c2.cityDictionary.get(target)[1] - 1
                 if (c1.nukeResearch > c2.aaResearch):
@@ -225,5 +228,3 @@ def agentCountryTurn(country, players):
             targetCities.append(k)
         targetCity = targetCountry.cityDictionary.get(targetCities[random.randint(0, len(targetCities))])
         launchNuke(country, targetCountry, targetCity)
-
-    country.update()
