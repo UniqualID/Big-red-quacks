@@ -116,3 +116,19 @@ def launchNuke(c1, c2, target): # c1 is your own country, c2 is the opposing cou
                 elif(diff = 1):
                     c2.cityDictionary.get(target)[0] = initPop*.95;
                     c2.population -= initPop*.05
+
+
+def researchPurchase(country, researchType):
+    if(researchType == "Anti-Air"):
+        stock = 0
+        for (k, v) in country.cityDictionary.items():
+            stock += v[1]
+        cost = country.aaResearch * 25000 * (1.025**stock)
+        if(treasury > cost):
+            country.treasury = country.treasury - cost
+            country.aaResearch += 1
+    elif(researchType == "Nuclear"):
+        costs = country.nukeResearch * 25000 * (1.025**country.nukes)
+        if(treasury > cost):
+            country.treasury = country.treasury - cost
+            country.nukeResearch += 1

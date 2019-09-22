@@ -33,8 +33,15 @@ class PlayerCountry:
         oldGDP = self.GDP
 
 
-
+        #Updates population
         self.population = ((cResources-population)*gRate) + population
+
+        #Updates population in all cities
+        for (k, v) in self.cityDictionary.items():
+            v[0] = v[0] * (population/oldPop)
+
+        #Updates GDP
         self.GDP = GDP + (population - startingPop)*gdpGrowth # ADD TRADE DEALS IN TURN
 
+        #Refreshes Treasury
         self.treasury = self.treasury + self.GDP
