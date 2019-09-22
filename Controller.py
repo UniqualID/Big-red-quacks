@@ -1,6 +1,7 @@
 import sys
 import pygame
 import time
+# import helper_functions
 
 
 
@@ -15,9 +16,9 @@ class Controller:
                                ["Korea", 25000000, 24750000, 100000, 0, 0, 0, 0, 0, 0, [0, 0, 1, -1, 0, 0]],
                                ["China", 1400000000, 1400000000, 700000, 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, -1, 1]],
                                ["Pakistan", 200000000, 200000000, 300000, 0, 0, 0, 0, 0, 0, [0, 0, 0, 0, 1, -1]]]
-        self.cities = { "USA" : { "Chicago" : [23333333.3, 0], "Salt Lake" : [23333333.3, 0], "Los Angeles" : [23333333.3, 0], "Jacksonville" : [23333333.3, 0], "Seattle" : [23333333.3, 0], "San Fransisco" : [23333333.3, 0], "Houston" : [23333333.3, 0], "Austin" : [23333333.3, 0], "Washington DC" : [23333333.3, 0], "Pheonix" : [23333333.3, 0], "Saint Louis" : [23333333.3, 0], "Columbus" : [23333333.3, 0], "Charlotte" : [23333333.3, 0], "Denver" : [23333333.3, 0]},
+        self.cities = { "USA" : { "Chicago" : [23333333.3, 0], "Salt Lake" : [23333333.3, 0], "Los Angeles" : [23333333.3, 0], "Jacksonville" : [23333333.3, 0], "Seattle" : [23333333.3, 0], "San Fransisco" : [23333333.3, 0], "Houston" : [23333333.3, 0], "Austin" : [23333333.3, 0], "Washington DC" : [23333333.3, 0], "Pheonix" : [23333333.3, 0], "St. Louis" : [23333333.3, 0], "Columbus" : [23333333.3, 0], "Charlotte" : [23333333.3, 0], "Denver" : [23333333.3, 0]},
                         "China" : { "Urumqi" : [233333333.3, 0], "Chengdu" : [233333333.3, 0], "Beijing" : [233333333.3, 0], "Guangzhou" : [233333333.3, 0], "Shanghai" : [233333333.3, 0], "Wuhan" : [233333333.3, 0]},
-                        "Russia" : { "Moscow" : [18125000, 0], "St. Petersburg" : [18125000, 0], "Novosibirsk" : [18125000, 0], "Krasnoyarsk" : [18125000, 0], "Irkutsk" : [18125000, 0], "Tiksi" : [18125000, 0], "Magadan" : [18125000, 0]},
+                        "Russia" : { "Moscow" : [18125000, 0], "St. Petersburg" : [18125000, 0], "Novosibirsk" : [18125000, 0], "Krasnoyarsk" : [18125000, 0], "Irkutsk" : [18125000, 0], "Arkhangel'sk" : [18125000, 0], "Magadan" : [18125000, 0]},
                         "Pakistan" : { "Islamabad" : [66666666.7, 0], "Karachi" : [66666666.7, 0], "Multan" : [66666666.7, 0]},
                         "UK" : {"London" : [33000000, 0], "Manchester" : [33000000, 0]},
                         "North Korea" : {"Pyongyang" : [25000000, 0]}
@@ -26,60 +27,19 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "START2"
+        self.state = "START"
         pygame.font.init()
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
         while True:
-            if(self.state == "START1"):
-                self.startLoop1()
-            elif(self.state == "START2"):
-                self.startLoop2()
+            if(self.state == "START"):
+                self.startLoop()
             elif(self.state == "GAME"):
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
 
-    def startLoop1(self):
-        pygame.key.set_repeat(1,50)
-        b1x = 150
-        b1y = 560
-        b2x = 1090
-        b2y = 560
-        while(self.state == "START1"):
-            background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(640*2+160, 480*2))
-            self.screen.blit(background, (0,0))
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            font = pygame.font.Font("assets/fonts/titleFont.TTF", 40)
-            title = font.render('Cold War!', True, (250,250,250))
-            self.screen.blit(title, (630,100))
-            pygame.draw.rect(self.screen, (0,192,0), (b1x,b1y,200,100)) #quit ((RGB)(x, y, length x, length y))
-            pygame.draw.rect(self.screen, (0,192,0), (b2x,b2y,200,100)) #play
-            font = pygame.font.Font("assets/fonts/pixelplay.TTF", 45)
-            start_button = font.render('PLAY', True, (0,0,0))
-            self.screen.blit(start_button, (b2x+57,b2y+35))
-            quit_button = font.render('QUIT', True, (0,0,0))
-            self.screen.blit(quit_button, (b1x+57,b2y+35))
-            mouse = pygame.mouse.get_pos()
-            click = pygame.mouse.get_pressed() #tuple postition
-            if mouse[0] in range(b2x,b2x+200) and mouse[1] in range(b2y,b2y+100):
-                pygame.draw.rect(self.screen, (80,208,255), (b2x,b2y,200,100)) #play
-                start_button = font.render('PLAY', True, (0,0,0))
-                self.screen.blit(start_button, (b2x+57,b2y+35))
-            if mouse[0] in range(b1x,b1x+200) and mouse[1] in range(b1y,b1y+100):
-                pygame.draw.rect(self.screen, (80,208,255), (b1x,b1y,200,100)) #exit
-                quit_button = font.render('QUIT', True, (0,0,0))
-                self.screen.blit(quit_button, (b1x+57,b2y+35))
-            if click[0] == 1 and mouse[0] in range(b1x,b1x+200) and mouse[1] in range(b1y,b1y+100):
-                sys.exit()
-            if click[0] == 1 and mouse[0] in range(b2x,b2x+200) and mouse[1] in range(b2y,b2y+100):
-                self.state = "START2"
-            pygame.display.flip()
-
-
-    def startLoop2(self):
+    def startLoop(self):
         b1x = 150
         b2x = 1090
         b2y = 460
@@ -90,7 +50,7 @@ class Controller:
         music = pygame.mixer.Sound("assets/papers.wav")
         pygame.mixer.Sound.play(music)
 
-        while(self.state == "START2"):
+        while(self.state == "START"):
             background = pygame.transform.smoothscale(pygame.image.load("assets/background.jpg").convert_alpha(),(640*2+160, 480*2))
             self.screen.blit(background, (0,0))
             for event in pygame.event.get():
@@ -285,10 +245,27 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (655,232)) #Manchester
 
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1180,300)) #Pyongyang
+<<<<<<< HEAD
+=======
+
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (960,330)) #Islamabad
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (955,345)) #Multan
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (945,365)) #Karachi
+
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (805,225)) #Moscow
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1020,230)) #Novosibirsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (800,210)) #St. Pertersburg
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1220,250)) #Khabarovsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1090,240)) #Irkutsk
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (830,270)) #Krasnodar
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (1280,205)) #Magadan
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.png").convert_alpha(),(13, 13)), (825,205)) #Arkhangel'sk
+
+>>>>>>> f17ace08279f177e601d34a2a865f3648bc4c2fe
 
 
             pygame.display.flip()
-            time.sleep(15)
+            time.sleep(10)
             sys.exit()
     def endLoop(self):
         pass
