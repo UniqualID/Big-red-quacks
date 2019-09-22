@@ -64,11 +64,7 @@ def fTrage(country1, country2, resource1, amount1, resource2, amount2): #f = foo
         country1.nukes = country1.nukes + amount1
 
 def launchNuke(c1, c2, target): # c1 is your own country, c2 is the opposing country, target is the specific city
-<<<<<<< HEAD
-    if (c1):
-=======
     if (c1.faValues.get(c2.name) == 0):
->>>>>>> 07e6cac5c0785460a6cbf78ffea6f881226dddcc
         if (c1.nuke > 0):
             c1.nuke = c1.nuke - 1
             if (c2.cityDictionary.get(target)[1] != 0):
@@ -155,3 +151,17 @@ def makeAntiAir(c1, city):
     if (c1.treasury >= 1500000):
         c1.treasury -= 1500000
         c1.cityDictionary.get(city)[1] + 1
+
+def winLossCondition(players, nukes, turn):
+    if (nukes >= 100):
+        return None, False
+    elif (turn == 100):
+        highest = 0
+        for player in players:
+            if ((player.population)/(player.startingPop) > highest):
+                highest = player
+        return player, True
+    else:
+        for player in players:
+            if ((player.population)/(player.startingPop) < .5):
+                return player, False
