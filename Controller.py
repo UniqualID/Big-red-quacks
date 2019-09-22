@@ -7,6 +7,7 @@ from PlayerCountry import PlayerCountry
 
 
 class Controller:
+    selected = 0
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
 
@@ -28,10 +29,10 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "START"
+        self.state = "GAME"
         pygame.font.init()
         self.player = None
-        self.selected = -1
+
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
         while True:
@@ -216,8 +217,18 @@ class Controller:
         elif self.selected == 5:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,785))
 
-        pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
-        self.screen.blit(font.render(player.name, True, (0,0,0)), (375,301))
+        boxX = 470
+        boxY = 850
+        pygame.draw.rect(self.screen, (0,191,0), (boxX,boxY,370,83))
+        self.screen.blit(font.render(player.name, True, (255,255,255)), (boxX, boxY))
+        self.screen.blit(font.render(str(player.population), True, (255,255,255)), (boxX, boxY+20))
+        self.screen.blit(font.render(str(player.cResources), True, (255,255,255)), (boxX, boxY+40))
+        self.screen.blit(font.render(str(player.GDP), True, (255,255,255)), (boxX, boxY+60))
+        self.screen.blit(font.render(str(player.gdpGrowth), True, (255,255,255)), (boxX+120, boxY))
+        self.screen.blit(font.render(str(player.fProduction), True, (255,255,255)), (boxX+120, boxY+20))
+        self.screen.blit(font.render(str(player.nukes), True, (255,255,255)), (boxX+120, boxY+40))
+        self.screen.blit(font.render(str(player.faValues[player.name]), True, (255,255,255)), (boxX+120, boxY+60))
+
 
 
 
