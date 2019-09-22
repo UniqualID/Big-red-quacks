@@ -214,10 +214,10 @@ class Controller:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,785))
 
 
+
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
         self.player = new PlayerCountry(self.country_values[selected][0], self.country_values[selected][1], self.country_values[selected][2], self.country_values[selected][3])
-
         #ayy weed lmao
         while self.state == "GAME":
             background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
