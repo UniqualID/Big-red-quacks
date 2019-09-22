@@ -7,7 +7,6 @@ from PlayerCountry import PlayerCountry
 
 
 class Controller:
-    selected = 0
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
 
@@ -30,7 +29,7 @@ class Controller:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
-        self.state = "GAME"
+        self.state = "START"
         pygame.font.init()
         self.player = None
         self.selected = 0
@@ -65,8 +64,7 @@ class Controller:
             title_img = pygame.transform.smoothscale(pygame.image.load("assets/title_img.jpg").convert_alpha(),(600,400))
             self.screen.blit(title_img, (400,-100))
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 100)
-            # title = font.render('Cold War!', True, (0,0,0))
-            # self.screen.blit(title, (400,100))
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
@@ -197,39 +195,43 @@ class Controller:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
-            # self.selected = selected
             pygame.event.wait()
             pygame.display.flip()
 
 
     def startHud(self, player, turns):
         font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
-        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.png").convert_alpha(),(1440,630)), (0,330))
+        self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.png").convert_alpha(),(1440,580)), (0,280))
 
         if self.selected == 0:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/US_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 1:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/UK_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 2:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Russia_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 3:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/China_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 4:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_hud.jpg").convert_alpha(), (195,195)), (20,685))
         elif self.selected == 5:
-            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,785))
+            self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,685))
 
         boxX = 470
-        boxY = 850
-        pygame.draw.rect(self.screen, (0,191,0), (boxX,boxY,370,83))
-        self.screen.blit(font.render(player.name, True, (255,255,255)), (boxX, boxY))
-        self.screen.blit(font.render(str(player.population), True, (255,255,255)), (boxX, boxY+20))
-        self.screen.blit(font.render(str(player.cResources), True, (255,255,255)), (boxX, boxY+40))
-        self.screen.blit(font.render(str(player.GDP), True, (255,255,255)), (boxX, boxY+60))
-        self.screen.blit(font.render(str(player.gdpGrowth), True, (255,255,255)), (boxX+120, boxY))
-        self.screen.blit(font.render(str(player.fProduction), True, (255,255,255)), (boxX+120, boxY+20))
-        self.screen.blit(font.render(str(player.nukes), True, (255,255,255)), (boxX+120, boxY+40))
-        self.screen.blit(font.render(str(player.faValues[player.name]), True, (255,255,255)), (boxX+120, boxY+60))
+        boxY = 740
+        # pygame.draw.rect(self.screen, (0,191,0), (boxX,boxY+15,370,83))
+        self.screen.blit(font.render(player.name, True, (255,255,255)), (boxX, boxY-45))
+        self.screen.blit(font.render(str(player.population), True, (255,255,255)), (boxX+50, boxY+10))
+        self.screen.blit(font.render("pop.",True, (255,255,255)), (boxX, boxY+10))
+        self.screen.blit(font.render(str(player.cResources), True, (255,255,255)), (boxX+50, boxY+35))
+        self.screen.blit(font.render("res.",True, (255,255,255)), (boxX, boxY+35))
+        self.screen.blit(font.render(str(player.GDP), True, (255,255,255)), (boxX+50, boxY+60))
+        self.screen.blit(font.render("gdp.",True, (255,255,255)), (boxX, boxY+60))
+        self.screen.blit(font.render(str(player.fProduction), True, (255,255,255)), (boxX+350, boxY+10))
+        self.screen.blit(font.render("food prod.",True, (255,255,255)), (boxX+200, boxY+10))
+        self.screen.blit(font.render(str(player.nukes), True, (255,255,255)), (boxX+350, boxY+35))
+        self.screen.blit(font.render("nukes",True, (255,255,255)), (boxX+200, boxY+35))
+        self.screen.blit(font.render(str(player.faValues[player.name]), True, (255,255,255)), (boxX+350, boxY+60))
+        self.screen.blit(font.render("foregn aff.",True, (255,255,255)), (boxX+200, boxY+60))
 
 
 
