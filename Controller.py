@@ -2,11 +2,11 @@ import sys
 import pygame
 import time
 import helper_functions
+import PlayerCountry
 
 
 
 class Controller:
-    selected = -1
     def __init__(self, width=640*2+160, height=480*2):
         pygame.init()
         # IN ORDER:             Name, population, cReasources , GDP, nukes, antiair, missile creation, food production, anti radiation, education, [allies/enemyies]
@@ -30,6 +30,7 @@ class Controller:
         self.state = "START"
         pygame.font.init()
         self.player = None
+        self.selected = -1
 
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
         while True:
@@ -44,7 +45,7 @@ class Controller:
         b1x = 150
         b2x = 1090
         b2y = 460
-        selected = -1
+        self.selected = -1
         selectedButton = -1
         pygame.key.set_repeat(1,50)
 
@@ -74,13 +75,13 @@ class Controller:
             click = pygame.mouse.get_pressed()
             # font for buttons
             font = pygame.font.Font("assets/fonts/titleFont.ttf", 40)
-            if selected == -1:
+            if self.selected == -1:
                 pygame.draw.rect(self.screen, (88,88,88), (628,b2y+120,150,50))
             else:
                 pygame.draw.rect(self.screen, (80,208,255), (628,b2y+120,150,50))
             self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
             if mouse[0] in range(628, 778) and mouse[1] in range(b2y+120,b2y+170):
-                if selected != -1:
+                if self.selected != -1:
                     pygame.draw.rect(self.screen, (0,192,0), (628,b2y+120,150,50))
                     self.screen.blit(font.render("Play", True, (0,0,0)), (650,b2y+118))
 
@@ -139,65 +140,65 @@ class Controller:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x-65, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
                 if click[0] == 1:
-                    selected = 0
+                    self.selected = 0
             if mouse[0] in range(b1x + 200, b1x + 100 + 200) and mouse[1] in range(b2y, b2y + 100):
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x-65 + 200, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
                 if click[0] == 1:
-                    selected = 1
+                    self.selected = 1
             if mouse[0] in range(b1x + 400, b1x + 100 + 400) and mouse[1] in range(b2y, b2y + 100):
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 400, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
                 if click[0] == 1:
-                    selected = 2
+                    self.selected = 2
             if mouse[0] in range(b1x + 600, b1x + 100 + 600) and mouse[1] in range(b2y, b2y + 100):
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 600, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/china_flag.jpg").convert_alpha(),(100, 100)), (b1x+600,b2y))
                 if click[0] == 1:
-                    selected = 3
+                    self.selected = 3
             if mouse[0] in range(b1x + 800, b1x + 100 + 800) and mouse[1] in range(b2y, b2y + 100):
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 800, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
                 if click[0] == 1:
-                    selected = 4
+                    self.selected = 4
             if mouse[0] in range(b1x + 1000, b1x + 100 + 1000) and mouse[1] in range(b2y, b2y + 100):
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
                 if click[0] == 1:
-                    selected = 5
+                    self.selected = 5
 
-            if selected == 0:
+            if self.selected == 0:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x-65, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/us_flag.jpg").convert_alpha(),(100, 100)), (b1x,b2y))
-            elif selected == 1:
+            elif self.selected == 1:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x-65 + 200, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/uk_flag.jpg").convert_alpha(),(100, 100)), (b1x+200,b2y))
-            elif selected == 2:
+            elif self.selected == 2:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 400, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/russia_flag.jpg").convert_alpha(),(100, 100)), (b1x+400,b2y))
-            elif selected == 3:
+            elif self.selected == 3:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 600, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/china_flag.jpg").convert_alpha(),(100, 100)), (b1x+600,b2y))
-            elif selected == 4:
+            elif self.selected == 4:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 800, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/Pakistan_flag.jpg").convert_alpha(),(100, 100)), (b1x+800,b2y))
-            elif selected == 5:
+            elif self.selected == 5:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/selected.jpg").convert_alpha(), (225, 175)), (b1x - 65 + 1000, b2y-38))
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/nk_flag.jpg").convert_alpha(),(100, 100)), (b1x+1000,b2y))
 
 
             if click[0] == 1 and mouse[0] in range(628,778) and mouse[1] in range(b2y+220,b2y+270):
                 sys.exit()
-            if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170) and selected != -1:
+            if click[0] == 1 and mouse[0] in range(628,728) and mouse[1] in range(b2y+120,b2y+170) and self.selected != -1:
                 self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/halo.jpg").convert_alpha(),(100,100)), (0,0))
                 self.state = "GAME"
 
-            self.selected = selected
+            # self.selected = selected
             pygame.event.wait()
             pygame.display.flip()
 
 
-    def startHud(self, player):
+    def startHud(self, player, turns):
         self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/hud_final.jpg").convert_alpha(),(1440,630)), (0,330))
 
         if self.selected == 0:
@@ -213,22 +214,30 @@ class Controller:
         elif self.selected == 5:
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/NK_hud.jpg").convert_alpha(), (195,195)), (20,785))
 
+        pygame.draw.rect(self.screen, (0,192,0), (898,300,150,50))
         self.screen.blit(font.render(player.name, True, (0,0,0)), (375,301))
+
+
 
 
     def gameLoop(self):
         pygame.key.set_repeat(1,50)
-        self.player = PlayerCountry(self.country_values[selected][0], 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+        self.player = PlayerCountry(self.country_values[self.selected][0], self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0],self.country_values[self.selected][0])
+        turns = 0
+        cityselection = -1
+        font = pygame.font.Font("assets/fonts/pixelplay.ttf", 30)
         #ayy weed lmao
         while self.state == "GAME":
             background = pygame.transform.smoothscale(pygame.image.load("assets/map.jpg").convert_alpha(),(640*2+160, 480*2))
             self.screen.blit(background, (0,0))
-            self.startHud(player)
+            self.startHud(player, turns)
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
+
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (385,285)) #NYC
             if click[0] == 1 and mouse[0] in range(385,600) and mouse[1] in range(285,600):
-                print("test")
+                CityName = font.render("NYC", )
+                pygame.draw(rect.screen, (0,0,0), ())
             self.screen.blit(pygame.transform.smoothscale(pygame.image.load("assets/dot.jpg").convert_alpha(),(13, 13)), (333,285)) #Chicago
             if click[0] == 1 and mouse[0] in range(333,346) and mouse[1] in range(220,270):
                 print("test")
