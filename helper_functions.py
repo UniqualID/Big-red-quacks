@@ -1,5 +1,5 @@
-import PlayerCountry
-import random
+from PlayerCountry import PlayerCountry
+from random import random, sample, randint
 
 def treasryChange(country, nChange):
     country.treasury = country.treasury + nChange
@@ -131,18 +131,18 @@ def researchPurchase(country, researchType):
         for (k, v) in country.cityDictionary.items():
             stock += v[1]
         cost = country.aaResearch * 25000 * (1.025**stock)
-        if(treasury > cost):
+        if(country.treasury > cost):
             country.treasury = country.treasury - cost
             country.aaResearch += 1
     elif(researchType == "Nuclear"):
-        costs = country.nukeResearch * 25000 * (1.025**country.nukes)
-        if(treasury > cost):
+        cost = country.nukeResearch * 25000 * (1.025**country.nukes)
+        if(country.treasury > cost):
             country.treasury = country.treasury - cost
             country.nukeResearch += 1
     elif(researchType == "Food Production"):
-        costs = country.fProduction * 12500
-        if(treasury > cost):
-            country.treasury -= costs
+        cost = country.fProduction * 12500
+        if(country.treasury > cost):
+            country.treasury -= cost
             country.fProduction += 1
 
 def getAAResearchCost(country):
@@ -171,7 +171,7 @@ def makeNuke(c1):
 def makeAntiAir(c1, city):
     if (c1.treasury >= 1500000):
         c1.treasury -= 1500000
-        c1.cityDictionary.get(city)[1] + 1
+        c1.cityDictionary[city] =  c1.cityDictionary.get(city)[1] + 1
 
 def winLossCondition(players, nukes, turn):
     if (nukes >= 100):
@@ -192,39 +192,39 @@ def agentCountryTurn(country, players):
     for (k, v) in country.cityDictionary.items():
         cities.append(k)
 
-    aaPurchase = (random() < ((1-(getAACost()/countr.treasury))*.35))
+    aaPurchase = (random() < ((1-(getAACost()/country.treasury))*.35))
     while(aaPurchase):
-        makeAntiAir(country, country.cityDictionary.get(cities[random.randint(0, len(cities))]))
-        nukePurchase = (random() < ((1-(getAACost()/countr.treasury))*.35))
+        makeAntiAir(country, cities[randint(0, len(cities)-1)])
+        nukePurchase = (random() < ((1-(getAACost()/country.treasury))*.35))
 
     nukePurchase = (random() < ((1-(getNukeCost()/country.treasury))*.25))
     while(nukePurchase):
         makeNuke(country)
         nukePurchase = (random() < ((1-(getNukeCost()/country.treasury))*.25))
 
-    investments = random.sample(range(3), random.randint(0,4))
+    investments = sample(range(3), randint(0,3))
     if(0 in investments):
-        nukeInvestment = (random() < ((1-(getNukeResearchCost()/country.treasury))*.33))
+        nukeInvestment = (random() < ((1-(getNukeResearchCost(country)/country.treasury))*.33))
         while(nukeInvestment):
             researchPurchase(country, "Nuclear")
-            nukeInvestment = random() < ((1-(getNukeResearchCost()/country.treasury))*.33)
+            nukeInvestment = random() < ((1-(getNukeResearchCost(country)/country.treasury))*.33)
     if(1 in investments):
-        aaInvestment = (random() < ((1-(getAAResearchCost()/country.treasury))*.33))
+        aaInvestment = (random() < ((1-(getAAResearchCost(country)/country.treasury))*.33))
         while(aaInvestment):
             researchPurchase(country, "Anti-Air")
-            aaInvestment = (random() < ((1-(getAAResearchCost()/country.treasury))*.33))
+            aaInvestment = (random() < ((1-(getAAResearchCost(country)/country.treasury))*.33))
     if(2 in investments):
-        fInvestment = (random() < ((1-(getFProductionCost()/country.treasury))*.33))
+        fInvestment = (random() < ((1-(getFProductionCost(country)/country.treasury))*.33))
         while(fInvestment):
             researchPurchase(country, "Food Production")
-            fInvestment = (random() < ((1-(getFProductionCost()/country.treasury))*.33))
+            fInvestment = (random() < ((1-(getFProductionCost(country)/country.treasury))*.33))
 
     if(country.nukes > 0 and random() < .5):
-        targetCountry = players[random.randint(0,len(players))]
-        while(target == country):
-            target = players[random.randint(0,len(players))]
+        targetCountry = players[randint(0,len(players)-1)]
+        while(targetCountry == country):
+            targetCountry = players[randint(0,len(players))]
         targetCities = []
         for (k, v) in targetCountry.cityDictionary.items():
             targetCities.append(k)
-        targetCity = targetCountry.cityDictionary.get(targetCities[random.randint(0, len(targetCities))])
+        targetCity = targetCountry.cityDictionary.get(targetCities[randint(0, len(targetCities))])
         launchNuke(country, targetCountry, targetCity)

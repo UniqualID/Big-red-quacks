@@ -18,12 +18,12 @@ class Controller:
                                ["Pakistan", 200000000, 200000000, 1.09, 300000, 1.025, 0, 0, 0, 300000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : 0, "Korea" : 0, "China" : 1, "Pakistan" : -1}],
                                ["Korea", 25000000, 24750000, 1.02, 100000, 1.02, 0, 0, 0, 100000*5, 0, {"USA" : 0, "UK" : 0, "Russia" : 1, "Korea" : -1, "China" : 0, "Pakistan" : 0}]]
 
-        self.cities = { "USA" : { "Chicago" : [23333333.3, 0], "Salt Lake" : [23333333.3, 0], "Los Angeles" : [23333333.3, 0], "Jacksonville" : [23333333.3, 0], "Seattle" : [23333333.3, 0], "San Fransisco" : [23333333.3, 0], "Charolette" : [23333333.3, 0], "Austin" : [23333333.3, 0], "Washington DC" : [23333333.3, 0], "Pheonix" : [23333333.3, 0], "St. Louis" : [23333333.3, 0], "Columbus" : [23333333.3, 0], "New York City" : [23333333.3, 0], "Denver" : [23333333.3, 0]},
-                        "China" : { "Urumqi" : [233333333.3, 0], "Chengdu" : [233333333.3, 0], "Beijing" : [233333333.3, 0], "Guangzhou" : [233333333.3, 0], "Shanghai" : [233333333.3, 0], "Wuhan" : [233333333.3, 0]},
-                        "Russia" : { "Moscow" : [18125000, 0], "St. Petersburg" : [18125000, 0], "Novosibirsk" : [18125000, 0], "Krasnoyarsk" : [18125000, 0], "Irkutsk" : [18125000, 0], "Arkhangel'sk" : [18125000, 0], "Magadan" : [18125000, 0]},
-                        "Pakistan" : { "Islamabad" : [66666666.7, 0], "Karachi" : [66666666.7, 0], "Multan" : [66666666.7, 0]},
-                        "UK" : {"London" : [33000000, 0], "Manchester" : [33000000, 0]},
-                        "Korea" : {"Pyongyang" : [25000000, 0]}
+        self.cities = { "USA" : { "Chicago" : tuple([23333333.3, 0]), "Salt Lake" : tuple([23333333.3, 0]), "Los Angeles" : tuple([23333333.3, 0]), "Jacksonville" : tuple([23333333.3, 0]), "Seattle" : tuple([23333333.3, 0]), "San Fransisco" : tuple([23333333.3, 0]), "Charolette" : tuple([23333333.3, 0]), "Austin" : tuple([23333333.3, 0]), "Washington DC" : tuple([23333333.3, 0]), "Pheonix" : tuple([23333333.3, 0]), "St. Louis" : tuple([23333333.3, 0]), "Columbus" : tuple([23333333.3, 0]), "New York City" : tuple([23333333.3, 0]), "Denver" : tuple([23333333.3, 0])},
+                        "China" : { "Urumqi" : tuple([233333333.3, 0]), "Chengdu" : tuple([233333333.3, 0]), "Beijing" : tuple([233333333.3, 0]), "Guangzhou" : tuple([233333333.3, 0]), "Shanghai" : tuple([233333333.3, 0]), "Wuhan" : tuple([233333333.3, 0])},
+                        "Russia" : { "Moscow" : tuple([18125000, 0]), "St. Petersburg" : tuple([18125000, 0]), "Novosibirsk" : tuple([18125000, 0]), "Krasnoyarsk" : tuple([18125000, 0]), "Irkutsk" : tuple([18125000, 0]), "Arkhangel'sk" : tuple([18125000, 0]), "Magadan" : tuple([18125000, 0])},
+                        "Pakistan" : { "Islamabad" : tuple([66666666.7, 0]), "Karachi" : tuple([66666666.7, 0]), "Multan" : tuple([66666666.7, 0])},
+                        "UK" : {"London" : tuple([33000000, 0]), "Manchester" : tuple([33000000, 0])},
+                        "Korea" : {"Pyongyang" : tuple([25000000, 0])}
                             }
         self.width = width
         self.height = height
@@ -36,6 +36,13 @@ class Controller:
         self.turnCounter = 0;
         self.selectedButton = -1
 
+    def endTurn(self, players):
+        for player in players:
+            if self.player.name != player.name:
+                helper_function.agentCountryTurn(player, players)
+        self.player.update()
+        self.turnCounter += 1
+
     def mainLoop(self):     ####Runs the function that is the part of the game we want to be running at any given time
         while True:
             if(self.state == "START"):
@@ -44,6 +51,8 @@ class Controller:
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
+
+
 
     def startLoop(self):
         b1x = 150
@@ -669,7 +678,11 @@ class Controller:
             font2 = pygame.font.Font("assets/fonts/pixelplay.ttf", 45)
             self.screen.blit(font2.render("End Turn", True, (255,255,255)), (1215,755))
             if click[0] == 1 and mouse[0] in range(1170, 1440) and mouse[1] in range(730, 1040):
-                self.turnCounter = self.turnCounter + 1
+                for player in allPlayers:
+                    if self.player.name != player.name:
+                        helper_functions.agentCountryTurn(player, allPlayers)
+                self.player.update()
+                self.turnCounter += 1
 
             self.screen.blit(font2.render(str(self.turnCounter),True, (255,255,255)), (10,0))
             if click[0] == 1 and mouse[0] in range(0,100) and mouse[1] in range(0,100):
@@ -686,10 +699,3 @@ class Controller:
 
     def endLoop(self):
         pass
-
-    def endTurn(players):
-        for player in players:
-            if self.player.name != player.name:
-                agentCountryTurn(player, players)
-        self.player.update()
-        self.turnCounter += self.turnCounter
