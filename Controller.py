@@ -235,8 +235,8 @@ class Controller:
         self.screen.blit(font.render("food prod.",True, (255,255,255)), (boxX+200, boxY+10))
         self.screen.blit(font.render(str(player.nukes), True, (255,255,255)), (boxX+350, boxY+35))
         self.screen.blit(font.render("nukes",True, (255,255,255)), (boxX+200, boxY+35))
-        self.screen.blit(font.render(str(player.faValues[player.name]), True, (255,255,255)), (boxX+350, boxY+60))
-        self.screen.blit(font.render("foregn aff.",True, (255,255,255)), (boxX+200, boxY+60))
+        self.screen.blit(font.render(str(player.treasury), True, (255,255,255)), (boxX+350, boxY+60))
+        self.screen.blit(font.render("treasury.",True, (255,255,255)), (boxX+200, boxY+60))
 
 
 
@@ -642,20 +642,20 @@ class Controller:
             if bomb:
                 self.screen.blit(font.render("Fire Nuke?", True, (255,255,255)), (260,760))
                 if click[0] == True and mouse[0] in range(255,430) and mouse[1] in range(755,260):
-                    launchNuke(self.player,targetCountry , targetCity)
+                    helper_functions.launchNuke(self.player,targetCountry , targetCity)
                 aa = False
                 targetCountry = ""
 
             if aa:
                 self.screen.blit(font.render("Build anti Nuke?", True, (255,255,255)), (860,265))
                 if click[0] == True and mouse[0] in range(855,1030) and mouse[1] in range(855,260):
-                    makeAntiAir(self.player, targetCity)
+                    helper_functions.makeAntiAir(self.player, targetCity)
                 bomb = False
 
             font = pygame.font.Font("assets/fonts/pixelplay.ttf", 28)
             self.screen.blit(font.render("Buy Nuke?", True, (255,255,255)), (992,703))
             if click[0] == 1 and mouse[0] in range(985,1100) and mouse[1] in range(710,735):
-                makeNuke(self.player)
+                helper_functions.makeNuke(self.player)
 
             ##### END TURN BUTTON #####
             # pygame.draw.rect(self.screen, (88,88,88), (1170, 730, 220, 110)) #x, y, len, wid
